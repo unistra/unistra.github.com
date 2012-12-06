@@ -1,0 +1,80 @@
+These are some things you should understand about Perl datastructures (and if
+you learn something there, maybe it's time to read all the perltut* from the
+perl distribution).
+
+* Perl works with values instead of references so a hashes and arrays can be
+  empty, never undefined (only a scalar can be undef)
+* Arrays and hashes can store lists, * , is the operator to create a list.
+* Perl takes carre of the context (scalar or list) which is a very expressive
+  way to "do what i mean" (which is a Perl motto).
+* in a scalar context, an array returns the number of elements
+* a boolean context *is* a scalar context
+* sigils means "what i get" and not "where it comes from"
+
+so:
+
+* defined( @data ) is a perl non-sense
+* @my_array = undef actually means $my_array[0] = undef;
+* @my_array = (undef, 'a') actually means
+
+    $my_array[0] = undef;
+    $my_array[1] = 'a';
+
+* @dict{qw< foo bar >} = (undef, 'a') actually means
+
+    $dict{foo} = undef;
+    $dict{bar} = 'a';
+
+* @dict{qw< foo bar >} = @dict{qw< bar foo >} exchanges the values of
+  $dict{foo} and $dict{bar}
+
+* if you want to know if the array is empty, just use a scalar context
+
+    if ( @data ) {
+    }
+    if ( %dict ) {
+    }
+
+* $#my_array is the bound, not the size
+
+    @my_array == 1+ $#my_array
+
+* negative subscripts are working but not reverse range
+
+    $my_array[ $#my_array ] # is actually
+    $my_array[ -1 ]
+    $my_array[ $#my_array -1 ] # is actually
+    $my_array[ -2 ]
+
+
+* call a sub using & is a way to share @_ with the caller! (very powerfull but tricky for most of us). If you don't understand or don't want that, please don't call using &.
+
+* remember for and map loops are side-effects, even if you declare a variable
+
+    @data = ( 1..3 );
+    for my $d ( @data ) { $d++ }
+
+    # so @data is now 2,3,4
+
+* about booleans: 
+
+    $dict{key} = undef;
+    exists  $dict{key} # true
+    defined $dict{key} # false
+    0   # false
+    1   # true
+    '0' # false (converted to 0)
+    '1' # true  (converted to 1)
+    ''  # false (empty string)
+    length '0' # true (converted to 1)
+
+* perl autovivification
+
+if you challenge perl on nested datastructures, it will create everything
+needed to anwser correctly so:
+
+    if ($my_hash{'level1'}{'level2'}) {...}
+
+needed to anwser correctly so even if $my_hash{level1} was empty, it will be
+filled with a { level2 => undef } hashref in the mean to reply false.
+
