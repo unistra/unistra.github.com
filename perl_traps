@@ -2,14 +2,14 @@ These are some things you should understand about Perl datastructures (and if
 you learn something there, maybe it's time to read all the perltut* from the
 perl distribution).
 
-* Perl works with values instead of references so a hashes and arrays can be
+* Perl works with values instead of references so a hash and array can be
   empty, never undefined (only a scalar can be undef)
 * Arrays and hashes can store lists, * , is the operator to create a list.
-* Perl takes carre of the context (scalar or list) which is a very expressive
+* Perl takes care of the context (scalar or list) which is a very expressive
   way to "do what i mean" (which is a Perl motto).
 * in a scalar context, an array returns the number of elements
 * a boolean context *is* a scalar context
-* sigils means "what i get" and not "where it comes from"
+* sigils mean "what i get" and not "where it comes from"
 
 so:
 
@@ -70,7 +70,7 @@ so:
 
 * perl autovivification
 
-if you challenge perl on nested datastructures, it will create everything
+If you challenge perl on nested datastructures, it will create everything
 needed to anwser correctly so:
 
     if ($my_hash{'level1'}{'level2'}) {...}
