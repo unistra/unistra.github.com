@@ -1,8 +1,17 @@
 ---
 layout: page
-title: Unistra on github 
+#title: Unistra on github 
 #tagline: Supporting tagline
+tags: pycon yapc fpw présentations
 ---
 {% include JB/setup %}
 
-Ce site est le dépot des documents communautaires de la direction informatique de l'université de Strasbourg.
+Dépot des documents communautaires de la direction informatique de l'université de Strasbourg.
+
+* [dépots de codes source](http://github.com/unistra)
+* [documentation](doc/)
+* [présentations effectuées par des membres de la direction](doc/talks)
+* [notes et astuces](doc/tips)
+
+<img src="/assets/img/logo.uds.jpg">
+

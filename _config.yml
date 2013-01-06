@@ -9,7 +9,7 @@ pygments: true
 # Themes are encouraged to use these universal variables 
 # so be sure to set them if your theme uses them.
 #
-title : Unistra on github
+title : Unistra
 tagline: perl, unix, library sciences
 
 # The production_url is only used when full-domain names are needed
