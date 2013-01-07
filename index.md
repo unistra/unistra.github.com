@@ -10,8 +10,8 @@ Dépot des documents communautaires de la direction informatique de l'universit�
 
 * [dépots de codes source](http://github.com/unistra)
 * [documentation](doc/)
-* [présentations effectuées par des membres de la direction](doc/talks)
-* [notes et astuces](doc/tips)
+* [présentations effectuées par des membres de la direction](talks)
+* [notes et astuces](tips)
 
 <img src="/assets/img/logo.uds.jpg">
 
