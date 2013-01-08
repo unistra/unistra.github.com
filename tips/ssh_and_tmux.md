@@ -25,7 +25,7 @@ hostname foo.example.com
 user adm
 
 host bar
-hostname foo.example.com
+hostname bar.example.com
 user adm
 </pre></code>
 
