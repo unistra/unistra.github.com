@@ -45,8 +45,18 @@ ont un operateur '!' (toggle). on peut donc écrire
 
     nnoremap ,p :paste!<cr>
 
+# remplir son buffer grace au monde
 
+! permet de piper du contenu à votre shell. ainsi 
 
+    :!ls  " affiche le résultat de ls
+    :r!ls " copie le résultat de ls dans votre fichier 
+    :,$!sort " trie toutes les lignes jusqu'à la fin du fichier avec sort
 
+# TODO: va mourrir, toi et ton IDE! 
 
-
+* navigation dans les fenetres, les buffers
+* utilisation de vim comme filtre et navigation dans les répertoires, fichiers
+* vimdiff
+* omnicompletion
+* eclim ? 
