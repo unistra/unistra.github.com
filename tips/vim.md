@@ -60,3 +60,10 @@ ont un operateur '!' (toggle). on peut donc écrire
 * vimdiff
 * omnicompletion
 * eclim ? 
+
+# q utilise les buffers nommés
+
+c'est bon à savoir parceque ca permet d'editer la macro en faisant un 'let @a'
+ou, dans un buffer, ou '"ay' et '"ap'
+
+
