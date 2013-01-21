@@ -16,9 +16,9 @@ quand vous etes dans un
 
 # editer l'history dans un buffer
 
-quand vous éditez une commande, tappez <c-f> pour vous retrouver dans un
+quand vous éditez une commande, tappez &lt;c-f> pour vous retrouver dans un
 buffer contenant l'historique des commandes. placez-vous sur n'importe
-quelle commande, éditez-la, tappez <cr> et elle sera executée.
+quelle commande, éditez-la, tappez &lt;cr> et elle sera executée.
 
 # set paste
 
