@@ -12,9 +12,6 @@ dont le motif de la ligne host est correct. Voilà qq bonnes recettes
 ## les aliases
 
 <code><pre>
-</pre></code>
-
-<code><pre>
 
 host gh
 hostname github.com
