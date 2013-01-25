@@ -53,3 +53,15 @@ et de temps en temps
 du coup mes devs sont dans une branche devel que je sync depuis master. POINT!
 il serait pe plus simple de maintenir le git dans une branche 'mainstream'. pas
 cherché.
+
+# des infos git dans le prompt zsh 
+
+precmd est une commande qui est lancée par zsh avant chaque affichage de
+prompt. par defaut elle ne fait rien mais il est possible de la surcharger.
+
+    shush2 () { "$@" 2> /dev/null }
+    git_whatsup () {
+        local up="$(shush2 git log -1 --format='%d')"
+        [[ -n $up ]] && print "$up + $( shush2 git status -s |wc -l) modifs"
+    }
+    precmd () { export PS1="[%T] %n@%M%b:%~ |$(git_whatsup )"$'\n'"> " }
