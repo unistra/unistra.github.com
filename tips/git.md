@@ -35,4 +35,21 @@ vous pouvez maintenant tapper
 
 installer fugitive.vim pour utiliser git directement depuis vim
 
+# git et svn
 
+il est possible de maintenir un depot git qui puisse faire un rebase avec une
+série de patches venus d'un serveur SVN. c'est ce que je fais avec [sympa](http://sympa.org).
+
+    git svn clone https://subversion.renater.fr/sympa/branches/sympa-6.1-branch sympa
+    cd sympa
+    git remote add origin git@github.com:eiro/sympa.git
+    git push -u origin master
+
+et de temps en temps
+
+    git svn fetch
+    git svn rebase
+
+du coup mes devs sont dans une branche devel que je sync depuis master. POINT!
+il serait pe plus simple de maintenir le git dans une branche 'mainstream'. pas
+cherché.
