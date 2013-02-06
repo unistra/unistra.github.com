@@ -139,7 +139,7 @@ ajoutez les clefs de vos collègues dans vos '~/.ssh/authorized_keys'
 en préfixant les lignes par une commande qui sera forcée lors de la connexion.
 
 <code><pre>
-command="tmux att -t jean" 
+command="tmux att -t jean" ssh-dss AAAB3NzaC1kc3MAAA...
 </pre></code>
 
 jean ne peut maintenant se connecter à votre machine (et avec votre identitée) que si une session "jean" y existe. renommez votre session de travail "jean" et invitez-le.
