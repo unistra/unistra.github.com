@@ -12,6 +12,7 @@ Dépot des documents communautaires de la direction informatique de l'universit�
 * [documentation](doc/)
 * [présentations effectuées par des membres de la direction](talks)
 * [notes et astuces](tips)
+* [developpement](dev)
 
 <img src="/assets/img/logo.uds.jpg">
 
