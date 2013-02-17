@@ -20,7 +20,7 @@ layout: page
 
 * peu de libs et pas de systeme pour les trouver et les installer
 * set  ne peut pas prendre plusieurs valeurs
-* pas de vraie closure. un [détournement avec alias](http://wiki.tcl.tk/3330)
+* même si il existe un [détournement avec alias](http://wiki.tcl.tk/3330), Tcl n'a pas de vraie closure. Du coup rien qui ressemble à des générateurs? j'ai trouvé un exemple d'[implémentation de filtres](http://wiki.hping.org/133) mais rien de "on-demand".
 
 ### gni ?
 
