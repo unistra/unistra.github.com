@@ -42,3 +42,12 @@ en test ou à voir:
 * [Object::Remote](https://metacpan.org/module/Object::Remote)
 
 
+# read later
+
+* [http://mvolo.com/why-average-latency-is-a-terrible-way-to-track-website-performance-and-how-to-fix-it/](http://mvolo.com/why-average-latency-is-a-terrible-way-to-track-website-performance-and-how-to-fix-it/)
+
+# Books
+
+[Community curated collection of legally free books (hackershelf.com)](http://hackershelf.com)
+
+
