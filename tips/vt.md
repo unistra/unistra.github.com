@@ -35,7 +35,7 @@ retoqués:
 en test ou à voir:
 
 * [Fabric](http://docs.fabfile.org/en/1.5/)
-* [salt stack](http://saltstack.org/)
+* [salt stack](http://saltstack.org/) tres rapide pour des vms et conteneurs: utilise 0MQ.
 * [slaughter](http://www.steve.org.uk/Software/slaughter/)
 * [rex](http://rexify.org/) semble embarquer un mécanisme à la [Vagrant](http://www.vagrantup.com/)
 * [chef](http://wiki.opscode.com/) et [Vagrant](http://www.vagrantup.com/) pour le dev.
