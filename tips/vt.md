@@ -39,8 +39,13 @@ en test ou à voir:
 * [slaughter](http://www.steve.org.uk/Software/slaughter/)
 * [rex](http://rexify.org/) semble embarquer un mécanisme à la [Vagrant](http://www.vagrantup.com/)
 * [chef](http://wiki.opscode.com/) et [Vagrant](http://www.vagrantup.com/) pour le dev.
-* [Object::Remote](https://metacpan.org/module/Object::Remote)
+* [Object::Remote](https://metacpan.org/module/Object::Remote) 
 
+# installation sous windows 
+
+* [Chocolatey Nuget](http://chocolatey.org/), installer basé sur powershell et .Net 
+* [CloneZilla](http://clonezilla.org/) pour les masters
+* [Nullsoft installer](http://nsis.sourceforge.net/NSIS_2) possède des DSL de plus haut niveau et est packagé pour debian.
 
 # read later
 
