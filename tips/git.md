@@ -24,9 +24,9 @@ plutot que status -s
 
 dans votre ~/.ssh/config, ajoutez
 
-    host gh
-    hostname github.com
-    user git
+    Host gh
+    Hostname github.com
+    User git
 
 vous pouvez maintenant tapper
 
