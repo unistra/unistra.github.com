@@ -42,7 +42,7 @@ Les variables d'environnement utilisées par [`git commit`][git-commit-tree][^2]
 
 ## le script
 
-{% highlight sh %}
+{% highlight raw %}
 #!/bin/bash
 
 # define GIT Name from ~/.ssh/authorized_keys
