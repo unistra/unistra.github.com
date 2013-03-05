@@ -1,5 +1,7 @@
 ---
 layout: page
+title: réaliser un screencast sous windows
+group: tips
 ---
 {% include JB/setup %}
 

@@ -1,3 +1,10 @@
+---
+layout: page
+title: modules
+group: perl
+---
+{% include JB/setup %}
+
 # Prérequis
 
     perldoc perldoc 

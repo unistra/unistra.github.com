@@ -1,3 +1,10 @@
+---
+layout: page
+title: document écrit pour remplacer la section actuelle de la doc de sympa
+group: doc
+---
+{% include JB/setup %}
+
 These are some things you should understand about Perl datastructures (and if
 you learn something there, maybe it's time to read all the perltut* from the
 perl distribution).

@@ -1,5 +1,7 @@
 ---
 layout: page
+title: vim
+group: tips
 ---
 {% include JB/setup %}
 

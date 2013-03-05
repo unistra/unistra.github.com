@@ -1,5 +1,7 @@
 ---
 layout: page
+title: vt
+group: tips
 ---
 {% include JB/setup %}
 

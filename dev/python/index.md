@@ -1,5 +1,6 @@
 ---
 layout: page
+title: Python
 ---
 
 # ce qui manque a python

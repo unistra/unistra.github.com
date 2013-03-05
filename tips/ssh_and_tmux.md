@@ -1,5 +1,7 @@
 ---
 layout: page
+title: ssh et tmux
+group: tips
 ---
 {% include JB/setup %}
 

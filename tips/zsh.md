@@ -1,5 +1,7 @@
 ---
 layout: page
+title: ZSH
+group: tips
 ---
 {% include JB/setup %}
 
