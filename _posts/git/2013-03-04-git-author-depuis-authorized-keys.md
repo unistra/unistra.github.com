@@ -2,7 +2,7 @@
 layout: post
 title: Git commit author depuis le fichier authorized  keys
 author: decornod
-category : [tips, git]
+category : tips/git
 tags : [tips, git, ssh]
 ---
 {% include JB/setup %}
