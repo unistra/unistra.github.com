@@ -15,26 +15,26 @@ dont le motif de la ligne host est correct. Voilà qq bonnes recettes
 
 <code><pre>
 
-host gh
-hostname github.com
-user git
+Host gh
+Hostname github.com
+User git
 
-host foo
-hostname foo.example.com
-user adm
+Host foo
+Hostname foo.example.com
+User adm
 
-host bar
-hostname bar.example.com
-user adm
+Host bar
+Hostname bar.example.com
+User adm
 </pre></code>
 
-vous pouvez maintenant tapper 
+vous pouvez maintenant tapper
 
 * 'ssh foo' et non 'ssh adm@foo.example.com'
 * 'scp .zshenv foo:' et non 'ssh adm@foo.example.com'
 
 ça marche avec à peu prêt toutes les commandes (rsync, git, …), ainsi vous
-pouvez saisir 
+pouvez saisir
 
 git clone gh:unistra/unista.github.com
 
@@ -43,7 +43,7 @@ pour cloner le dépot de ce site (si vous en avez les droits)
 ## forward  systèmatique de votre agent
 
 <code><pre>
-host *
+Host *
 ForwardAgent yes
 </pre></code>
 
@@ -68,9 +68,9 @@ soit:
 vous vous connectez à foo en transférant tout le traffic de bar via nc
 
 <code><pre>
-host foo
-hostname foo.example.com
-user jo
+Host foo
+Hostname foo.example.com
+User jo
 ProxyCommand ssh bar nc %h %p
 </pre></code>
 
