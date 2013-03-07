@@ -1,6 +1,6 @@
 ---
 layout: page
-title: ZSH
+title: zsh
 group: tips
 ---
 {% include JB/setup %}

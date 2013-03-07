@@ -1,6 +1,6 @@
 ---
 layout: page
-title: GIT
+title: git
 group: tips
 ---
 {% include JB/setup %}
