@@ -1,7 +1,4 @@
----
-layout: page
----
-{% include JB/setup %}
+% Trucs et astuces
 
 * [ssh et tmux](ssh_and_tmux.html)
 * [vim](vim.html)

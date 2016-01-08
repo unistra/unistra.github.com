@@ -1,49 +1,40 @@
----
-layout: page
----
-{% include JB/setup %}
+% Trucs et astuces vim
+
+# configuration
+
+    set wim=longest,list    # completion décente
+    set hlsearch incsearch  # highlight ce qui a été trouvé et ce qu'on trouve
+    set paste!              # pour éviter que la souris casse tout
 
 
-# saine completion
+# Best of normal
 
-ajoutez dans votre .vimrc:
+    ZZ # enregistrer et quitter
+    ZQ # quitter sans enregistrer
+    *  # chercher la prochaine occurence du mot sur lequel on est
+    ctrl-x-f # completer avec le nom d'un fichier
 
-    set wim=longest,list
+# Best of command
 
-pour obtenir un affichage des propositions de completion
+    <range>v//   # comme grep -v
+    <range>g//   # comme grep
+    <range>s///  # comme sed
+    <range>y a   # copie dans "a
+    <range>d     # supprime
 
-quand vous etes dans un
+# editer l'historique des commandes et recherches
 
-# editer l'history dans un buffer
+parceque vous voulez toute la puissance de vi quand vous éditez vos commandes
 
-quand vous éditez une commande, tappez &lt;c-f> pour vous retrouver dans un
-buffer contenant l'historique des commandes. placez-vous sur n'importe
-quelle commande, éditez-la, tappez &lt;cr> et elle sera executée.
+    q:  # éditer l'historique des commandes
+    q:  # éditer l'historique des recherches
 
-# set paste
+si vous êtes déjà en mode commande (ou recherche), tappez ctrl-f.
 
-ca merde quand vous copiez depuis le clipboard avec la souris? c'est parceque
-tout est interpreté comme une saisie au clavier: du coup les macros sont
-déclenchées.
+# toggle
 
-la soluc? 
-
-    :set paste
-    # faire la copie
-    :set nopaste
-
-## mieux ? 
-
-toutes les options booléennes de vim (celles qui peuvent être précédées par no)
-ont un operateur '!' (toggle). on peut donc écrire
-
-    :set paste!
-    # faire la copie
-    :set paste!
-
-## la macro ? 
-
-    nnoremap ,p :paste!<cr>
+    nnoremap ,!p :set paste!<cr>
+    nnoremap ,!n :set nu!<cr>
 
 # remplir son buffer grace au monde
 
@@ -60,10 +51,3 @@ ont un operateur '!' (toggle). on peut donc écrire
 * vimdiff
 * omnicompletion
 * eclim ? 
-
-# q utilise les buffers nommés
-
-c'est bon à savoir parceque ca permet d'editer la macro en faisant un 'let @a'
-ou, dans un buffer, ou '"ay' et '"ap'
-
-

@@ -1,7 +1,4 @@
----
-layout: page
----
-{% include JB/setup %}
+% trucs et astuces ssh+tmux
 
 # configurer votre client ssh (~/.ssh/config)
 
@@ -11,20 +8,17 @@ dont le motif de la ligne host est correct. Voilà qq bonnes recettes
 
 ## les aliases
 
-<code><pre>
+    Host gh
+    Hostname github.com
+    User git
 
-Host gh
-Hostname github.com
-User git
+    Host foo
+    Hostname foo.example.com
+    User adm
 
-Host foo
-Hostname foo.example.com
-User adm
-
-Host bar
-Hostname bar.example.com
-User adm
-</pre></code>
+    Host bar
+    Hostname bar.example.com
+    User adm
 
 vous pouvez maintenant tapper
 
@@ -40,17 +34,13 @@ pour cloner le dépot de ce site (si vous en avez les droits)
 
 ## forward  systèmatique de votre agent
 
-<code><pre>
-Host *
-ForwardAgent yes
-</pre></code>
+    Host *
+    ForwardAgent yes
 
 Votre agent sera maintenant systématiquement retransmis. Ainsi la commande qui
 suit ne vous demandera pas votre mot de passe sur bar.
 
-<code><pre>
-ssh foo ssh bar ls
-</pre></code>
+    ssh foo ssh bar ls
 
 ## ssh proxy command
 
@@ -65,16 +55,14 @@ soit:
 
 vous vous connectez à foo en transférant tout le traffic de bar via nc
 
-<code><pre>
-Host foo
-Hostname foo.example.com
-User jo
-ProxyCommand ssh bar nc %h %p
-</pre></code>
+    Host foo
+    Hostname foo.example.com
+    User jo
+    ProxyCommand ssh bar nc %h %p
 
 vous tappez maintenant
 
-* 'ssh foo ls' et non 'ssh bar ssh foo ls'
+* `ssh foo ls` et non `ssh bar ssh foo ls`
 
 vous pouvez aussi utiliser les outils traditionnels (scp, git, rsync, …) de manière transparente.
 
@@ -82,28 +70,22 @@ vous pouvez aussi utiliser les outils traditionnels (scp, git, rsync, …) de ma
 
 des commandes comme tmux, vim et autres nécessitent des que les tty soient correctement initialisées pour fonctionner. vous pouvez lancer ces commandes directement en forcant la création des tty:
 
-<code><pre>
-ssh -t vim /etc/foo
-</pre></code>
+    ssh -t vim /etc/foo
 
 # vimdiff entre 2 machines
 
 il est possible d'éditer un fichier directement avec vim grace au protocole 'scp:', il est tout aussi simple de faire un diff entre deux machines:
 
-<code><pre>
-vim scp://foo/.zshenv
-vimdiff scp://foo/.zshenv .zshenv
-</pre></code>
+    vim scp://foo/.zshenv
+    vimdiff scp://foo/.zshenv .zshenv
 
 encore un petit alias qui va bien:
 
-<code><pre>
-rediff () {
-        local f=$1
-        shift
-        vimdiff scp://$^@/$f $f
-}
-</pre></code>
+    rediff () {
+	    local f=$1
+	    shift
+	    vimdiff scp://$^@/$f $f
+    }
 
 et maintenant: 'rediff .zshrc foo bar' ouvre un vimdiff avec les .zshrc de localhost, foo et bar
 
@@ -120,16 +102,14 @@ la plupart des commandes tmux lancées se résument à ces 3 usages. t est un al
 * 't' liste les sessions existantes
 * 't foo' s'attache foo si elle existe, la crée si besoin
 
-<code><pre>
-t () {
-    (( $+1 )) || {
-        tmux ls | sed 's/:.*//'
-        return
+    t () {
+	(( $+1 )) || {
+	    tmux ls | sed 's/:.*//'
+	    return
+	}
+	tmux att -t $1 ||
+	    tmux new -s $1
     }
-    tmux att -t $1 ||
-        tmux new -s $1
-}
-</pre></code>
 
 # inviter un collègue sur sa session tmux
 
@@ -138,13 +118,9 @@ Afin d'inviter des collègues a travailler à distance sur son tmux,
 ajoutez les clefs de vos collègues dans vos '~/.ssh/authorized_keys'
 en préfixant les lignes par une commande qui sera forcée lors de la connexion.
 
-<code><pre>
-command="tmux att -t jean" ssh-dss AAAB3NzaC1kc3MAAA...
-</pre></code>
+    command="tmux att -t hack" ssh-dss AAAB3NzaC1kc3MAAA... jean@u
 
-jean ne peut maintenant se connecter à votre machine (et avec votre identitée) que si une session "jean" y existe. renommez votre session de travail "jean" et invitez-le.
+jean ne peut maintenant se connecter à votre machine (et avec votre identitée) que si une session "hack" y existe. renommez votre session de travail "hack" et invitez-le.
 
-<code><pre>
-tmux rename-session jean
-</pre></code>
+    tmux rename-session hack
 

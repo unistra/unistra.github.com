@@ -1,11 +1,4 @@
----
-layout: page
-#title: Unistra on github 
-#tagline: Supporting tagline
----
-{% include JB/setup %}
-
-Présentations réalisées par des membres de la direction informatique
+% Présentations réalisées par des membres de la direction informatique
 
 # en 2012
 

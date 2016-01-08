@@ -1,13 +1,13 @@
----
-layout: page
----
-{% include JB/setup %}
+% trucs et astuces git
 
 # alias qui vont bien
 
-tappez
+dans `.zshenv`
 
-    echo alias g=git >> ~/.zshenv
+    alias g=git
+
+ajouter des alias a git
+
     git config --global alias.s=status -s
     git config --global alias.ci=commit
     git config --global alias.co=checkout
@@ -16,11 +16,7 @@ tappez
     git config -l # vérifions que tout est bien en place
     git config -e # éditons
 
-apres avoir sourcé votre /.zshenv, vous pouvez maintenant tapper
-
-    g s
-
-plutot que status -s
+`g s` est maintenant équivalent à `git status -s`
 
 dans votre ~/.ssh/config, ajoutez
 
@@ -31,9 +27,6 @@ dans votre ~/.ssh/config, ajoutez
 vous pouvez maintenant tapper
 
     g clone gh:eiro/p5-perlude
-
-
-installer fugitive.vim pour utiliser git directement depuis vim
 
 # git et svn
 

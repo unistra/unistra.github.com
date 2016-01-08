@@ -1,9 +1,4 @@
----
-layout: page
----
-{% include JB/setup %}
-
-# Créer un screencast
+% production de videos et screencasts
 
 * télécharger et installer
     - [vlc](videolan.org)
