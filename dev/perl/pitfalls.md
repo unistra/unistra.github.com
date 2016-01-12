@@ -1,3 +1,5 @@
+# Perl pitfalls
+
 These are some things you should understand about Perl datastructures (and if
 you learn something there, maybe it's time to read all the perltut* from the
 perl distribution).
@@ -13,51 +15,63 @@ perl distribution).
 
 so:
 
-* defined( @data ) is a perl non-sense
-* @my_array = undef actually means $my_array[0] = undef;
-* @my_array = (undef, 'a') actually means
+* `defined(@data)` is a perl non-sense
+* `@my_array = undef` actually means `$my_array[0] = undef`
+* `@my_array = (undef, 'a')` actually means
 
+~~~{.perl}
     $my_array[0] = undef;
     $my_array[1] = 'a';
+~~~~
 
-* @dict{qw< foo bar >} = (undef, 'a') actually means
+* `@dict{qw< foo bar >} = (undef, 'a')` actually means
 
+~~~{.perl}
     $dict{foo} = undef;
     $dict{bar} = 'a';
+~~~
 
-* @dict{qw< foo bar >} = @dict{qw< bar foo >} exchanges the values of
-  $dict{foo} and $dict{bar}
+* `@dict{qw< foo bar >} = @dict{qw< bar foo >}` exchanges the values of
+  `$dict{foo} and $dict{bar}`
 
 * if you want to know if the array is empty, just use a scalar context
 
+~~~{.perl}
     if ( @data ) {
     }
     if ( %dict ) {
     }
+~~~
 
-* $#my_array is the bound, not the size
+* `$#my_array` is the bound, not the size
 
+~~~{.perl}
     @my_array == 1+ $#my_array
+~~~
 
 * negative subscripts are working but not reverse range
 
+~~~{.perl}
     $my_array[ $#my_array ] # is actually
     $my_array[ -1 ]
     $my_array[ $#my_array -1 ] # is actually
     $my_array[ -2 ]
+~~~
 
-
-* call a sub using & is a way to share @_ with the caller! (very powerfull but tricky for most of us). If you don't understand or don't want that, please don't call using &.
+* call a sub using `&` is a way to share `@_` with the caller! (very powerfull but tricky for most of us). If you don't understand or don't want that, please don't call using `&`.
 
 * remember for and map loops are side-effects, even if you declare a variable
 
+~~~{.perl}
     @data = ( 1..3 );
     for my $d ( @data ) { $d++ }
 
     # so @data is now 2,3,4
+~~~
 
 * about booleans: 
 
+~~~{.perl}
     $dict{key} = undef;
     exists  $dict{key} # true
     defined $dict{key} # false
@@ -67,14 +81,17 @@ so:
     '1' # true  (converted to 1)
     ''  # false (empty string)
     length '0' # true (converted to 1)
+~~~
 
 * perl autovivification
 
 If you challenge perl on nested datastructures, it will create everything
 needed to anwser correctly so:
 
+~~~{.perl}
     if ($my_hash{'level1'}{'level2'}) {...}
+~~~
 
-needed to anwser correctly so even if $my_hash{level1} was empty, it will be
-filled with a { level2 => undef } hashref in the mean to reply false.
+needed to anwser correctly so even if `$my_hash{level1}` was empty, it will be
+filled with a `{ level2 => undef }` hashref in the mean to reply false.
 
