@@ -1,44 +1,58 @@
 notes a récurerer sur le serveur
 
+~~~{.tt2}
 [% IF may_create_list %]
-   [% IF action == 'create_list_request' %][% SET class = 'MainMenuLinksCurrentPage' %][% ELSE %][% SET class = 'MainMenuLinks' %][% END %]<li><a class="[% class %]" href="[% path_cgi %]/create_list_request" >[%|loc%]Create list[%END%]</a></li>
+   [% IF action == 'create_list_request' %]
+       [% SET class = 'MainMenuLinksCurrentPage' %]
+   [% ELSE %]
+       [% SET class = 'MainMenuLinks' %]
+   [% END %]<li><a class="[% class %]" href="[%
+	path_cgi %]/create_list_request" >[%|loc%]Create list[%END%]</a></li>
 [% END %] 
+~~~
 
 devient:
 
+~~~{.tt2}
 [% IF may_create_list;
     IF action == 'create_list_request';
-        SET class = 'MainMenuLinksCurrentPage';
+	    SET class = 'MainMenuLinksCurrentPage';
     ELSE;
-        SET class = 'MainMenuLinks';
-    END %]<li><a class="[% class %]" href="[% path_cgi %]/create_list_request" >[%|loc%]Create list[%END%]</a></li>
-[% END %] 
+	    SET class = 'MainMenuLinks';
+    END;
+    %]<li><a class="[% class %]" href="[% path_cgi %]/create_list_request" >[% "Create list" |loc %]</a></li>[%
+END %] 
+~~~
 
-* [%|loc%]A text[%END%] peut etre écrit [% "A text" | loc %]   
-* SET class = 'MainMenuLinksCurrentPage' ( le SET est facultatif)  
-* class = 'MainMenuLinksCurrentPage' 
+* `[%|loc%]A text[%END%]` peut etre écrit `[% "A text" | loc %]`
+* `SET class = 'MainMenuLinksCurrentPage'` ( le `SET` est facultatif)  
+* `class = 'MainMenuLinksCurrentPage'`
 
 
+~~~{.tt2}
 [% IF may_create_list;
     IF action == 'create_list_request';
-        class = 'MainMenuLinksCurrentPage';
+	class = 'MainMenuLinksCurrentPage';
     ELSE;
-        class = 'MainMenuLinks';
+	class = 'MainMenuLinks';
     END %]<li><a class="[% class %]" href="[% path_cgi %]/create_list_request"
     >[% "Create list"|loc %]</a></li>
 [% END %] 
+~~~
 
 * use of ternary operator
 
-[% IF may_create_list;
-    %]<li><a class="[% action == 'create_list_request' ?  'MainMenuLinksCurrentPage' : 'MainMenuLinks' %]" href="[% path_cgi %]/create_list_request" >[% "Create list"|loc %]</a></li>
-[% END %] 
+~~~{.tt2}
+    [% IF may_create_list;
+	%]<li><a class="[% action == 'create_list_request' ?  'MainMenuLinksCurrentPage' : 'MainMenuLinks' %]" href="[% path_cgi %]/create_list_request" >[% "Create list"|loc %]</a></li>
+    [% END %] 
 
 
-[% IF may_create_list;
-    class = action == 'create_list_request' ?  'MainMenuLinksCurrentPage' : 'MainMenuLinks';
-    END %]<li><a class="[% class %]" href="[% path_cgi %]/create_list_request" >[%|loc%]Create list[%END%]</a></li>
-[% END %]
+    [% IF may_create_list;
+	class = action == 'create_list_request' ?  'MainMenuLinksCurrentPage' : 'MainMenuLinks';
+	END %]<li><a class="[% class %]" href="[% path_cgi %]/create_list_request" >[%|loc%]Create list[%END%]</a></li>
+    [% END %]
+~~~
 
 
 

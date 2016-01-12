@@ -2,7 +2,7 @@
 <head><meta charset="utf-8" />
 <meta http-equiv="x-ua-compatible" content="ie=edge" />
 <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1" />
-<link rel="stylesheet" href="../../look.css" />
+<link rel="stylesheet" href="./look.css" />
 <link rel="stylesheet" href="http://django-static.u-strasbg.fr/dipstrap/latest/css/bootstrap-unistra.min.css">
 <link rel="stylesheet" href="http://django-static.u-strasbg.fr/dipstrap/latest/css/bootstrap-theme-unistra.min.css">
 <link rel="stylesheet" href="http://django-static.u-strasbg.fr/dipstrap/latest/css/main.css">
@@ -16,7 +16,7 @@
 </head><body>
 
  <div class="navbar navbar-default navbar-fixed-top" role="navigation">
-    <img class="pull-left" src="../../img/unistra-white.png" alt="unistra" />
+    <img class="pull-left" src="./img/unistra-white.png" alt="unistra" />
       <div class="container">
 <!--
         <div class="navbar-header">
@@ -70,43 +70,49 @@
 </div>
 <div class="row-fluid">
 <div class="col-md-10"><p>notes a récurerer sur le serveur</p>
-[% IF may_create_list %][% IF action == 'create_list_request' %][% SET class = 'MainMenuLinksCurrentPage' %][% ELSE %][% SET class = 'MainMenuLinks' %][% END %]
-<li>
-<a class="[% class %]" href="[% path_cgi %]/create_list_request" >[%|loc%]Create list[%END%]</a>
-</li>
-<p>[% END %]</p>
+<pre class="tt2"><code>[% IF may_create_list %]
+   [% IF action == &#39;create_list_request&#39; %]
+       [% SET class = &#39;MainMenuLinksCurrentPage&#39; %]
+   [% ELSE %]
+       [% SET class = &#39;MainMenuLinks&#39; %]
+   [% END %]&lt;li&gt;&lt;a class=&quot;[% class %]&quot; href=&quot;[%
+    path_cgi %]/create_list_request&quot; &gt;[%|loc%]Create list[%END%]&lt;/a&gt;&lt;/li&gt;
+[% END %] </code></pre>
 <p>devient:</p>
-[% IF may_create_list; IF action == 'create_list_request'; SET class = 'MainMenuLinksCurrentPage'; ELSE; SET class = 'MainMenuLinks'; END %]
-<li>
-<a class="[% class %]" href="[% path_cgi %]/create_list_request" >[%|loc%]Create list[%END%]</a>
-</li>
-<p>[% END %]</p>
+<pre class="tt2"><code>[% IF may_create_list;
+    IF action == &#39;create_list_request&#39;;
+        SET class = &#39;MainMenuLinksCurrentPage&#39;;
+    ELSE;
+        SET class = &#39;MainMenuLinks&#39;;
+    END;
+    %]&lt;li&gt;&lt;a class=&quot;[% class %]&quot; href=&quot;[% path_cgi %]/create_list_request&quot; &gt;[% &quot;Create list&quot; |loc %]&lt;/a&gt;&lt;/li&gt;[%
+END %] </code></pre>
 <ul>
-<li>[%|loc%]A text[%END%] peut etre écrit [% &quot;A text&quot; | loc %]<br />
+<li><code>[%|loc%]A text[%END%]</code> peut etre écrit <code>[% &quot;A text&quot; | loc %]</code></li>
+<li><code>SET class = 'MainMenuLinksCurrentPage'</code> ( le <code>SET</code> est facultatif)<br />
 </li>
-<li>SET class = 'MainMenuLinksCurrentPage' ( le SET est facultatif)<br />
-</li>
-<li>class = 'MainMenuLinksCurrentPage'</li>
+<li><code>class = 'MainMenuLinksCurrentPage'</code></li>
 </ul>
-[% IF may_create_list; IF action == 'create_list_request'; class = 'MainMenuLinksCurrentPage'; ELSE; class = 'MainMenuLinks'; END %]
-<li>
-<a class="[% class %]" href="[% path_cgi %]/create_list_request"
-    >[% &quot;Create list&quot;|loc %]</a>
-</li>
-<p>[% END %]</p>
+<pre class="tt2"><code>[% IF may_create_list;
+    IF action == &#39;create_list_request&#39;;
+    class = &#39;MainMenuLinksCurrentPage&#39;;
+    ELSE;
+    class = &#39;MainMenuLinks&#39;;
+    END %]&lt;li&gt;&lt;a class=&quot;[% class %]&quot; href=&quot;[% path_cgi %]/create_list_request&quot;
+    &gt;[% &quot;Create list&quot;|loc %]&lt;/a&gt;&lt;/li&gt;
+[% END %] </code></pre>
 <ul>
 <li>use of ternary operator</li>
 </ul>
-[% IF may_create_list; %]
-<li>
-<a class="[% action == 'create_list_request' ?  'MainMenuLinksCurrentPage' : 'MainMenuLinks' %]" href="[% path_cgi %]/create_list_request" >[% &quot;Create list&quot;|loc %]</a>
-</li>
-<p>[% END %]</p>
-[% IF may_create_list; class = action == 'create_list_request' ? 'MainMenuLinksCurrentPage' : 'MainMenuLinks'; END %]
-<li>
-<a class="[% class %]" href="[% path_cgi %]/create_list_request" >[%|loc%]Create list[%END%]</a>
-</li>
-<p>[% END %]</p></div>
+<pre class="tt2"><code>    [% IF may_create_list;
+    %]&lt;li&gt;&lt;a class=&quot;[% action == &#39;create_list_request&#39; ?  &#39;MainMenuLinksCurrentPage&#39; : &#39;MainMenuLinks&#39; %]&quot; href=&quot;[% path_cgi %]/create_list_request&quot; &gt;[% &quot;Create list&quot;|loc %]&lt;/a&gt;&lt;/li&gt;
+    [% END %] 
+
+
+    [% IF may_create_list;
+    class = action == &#39;create_list_request&#39; ?  &#39;MainMenuLinksCurrentPage&#39; : &#39;MainMenuLinks&#39;;
+    END %]&lt;li&gt;&lt;a class=&quot;[% class %]&quot; href=&quot;[% path_cgi %]/create_list_request&quot; &gt;[%|loc%]Create list[%END%]&lt;/a&gt;&lt;/li&gt;
+    [% END %]</code></pre></div>
 </div>
 </div>
 
@@ -118,49 +124,55 @@
 <div class="grid-80">
     <section class="content"
     ><p>notes a récurerer sur le serveur</p>
-[% IF may_create_list %][% IF action == 'create_list_request' %][% SET class = 'MainMenuLinksCurrentPage' %][% ELSE %][% SET class = 'MainMenuLinks' %][% END %]
-<li>
-<a class="[% class %]" href="[% path_cgi %]/create_list_request" >[%|loc%]Create list[%END%]</a>
-</li>
-<p>[% END %]</p>
+<pre class="tt2"><code>[% IF may_create_list %]
+   [% IF action == &#39;create_list_request&#39; %]
+       [% SET class = &#39;MainMenuLinksCurrentPage&#39; %]
+   [% ELSE %]
+       [% SET class = &#39;MainMenuLinks&#39; %]
+   [% END %]&lt;li&gt;&lt;a class=&quot;[% class %]&quot; href=&quot;[%
+    path_cgi %]/create_list_request&quot; &gt;[%|loc%]Create list[%END%]&lt;/a&gt;&lt;/li&gt;
+[% END %] </code></pre>
 <p>devient:</p>
-[% IF may_create_list; IF action == 'create_list_request'; SET class = 'MainMenuLinksCurrentPage'; ELSE; SET class = 'MainMenuLinks'; END %]
-<li>
-<a class="[% class %]" href="[% path_cgi %]/create_list_request" >[%|loc%]Create list[%END%]</a>
-</li>
-<p>[% END %]</p>
+<pre class="tt2"><code>[% IF may_create_list;
+    IF action == &#39;create_list_request&#39;;
+        SET class = &#39;MainMenuLinksCurrentPage&#39;;
+    ELSE;
+        SET class = &#39;MainMenuLinks&#39;;
+    END;
+    %]&lt;li&gt;&lt;a class=&quot;[% class %]&quot; href=&quot;[% path_cgi %]/create_list_request&quot; &gt;[% &quot;Create list&quot; |loc %]&lt;/a&gt;&lt;/li&gt;[%
+END %] </code></pre>
 <ul>
-<li>[%|loc%]A text[%END%] peut etre écrit [% &quot;A text&quot; | loc %]<br />
+<li><code>[%|loc%]A text[%END%]</code> peut etre écrit <code>[% &quot;A text&quot; | loc %]</code></li>
+<li><code>SET class = 'MainMenuLinksCurrentPage'</code> ( le <code>SET</code> est facultatif)<br />
 </li>
-<li>SET class = 'MainMenuLinksCurrentPage' ( le SET est facultatif)<br />
-</li>
-<li>class = 'MainMenuLinksCurrentPage'</li>
+<li><code>class = 'MainMenuLinksCurrentPage'</code></li>
 </ul>
-[% IF may_create_list; IF action == 'create_list_request'; class = 'MainMenuLinksCurrentPage'; ELSE; class = 'MainMenuLinks'; END %]
-<li>
-<a class="[% class %]" href="[% path_cgi %]/create_list_request"
-    >[% &quot;Create list&quot;|loc %]</a>
-</li>
-<p>[% END %]</p>
+<pre class="tt2"><code>[% IF may_create_list;
+    IF action == &#39;create_list_request&#39;;
+    class = &#39;MainMenuLinksCurrentPage&#39;;
+    ELSE;
+    class = &#39;MainMenuLinks&#39;;
+    END %]&lt;li&gt;&lt;a class=&quot;[% class %]&quot; href=&quot;[% path_cgi %]/create_list_request&quot;
+    &gt;[% &quot;Create list&quot;|loc %]&lt;/a&gt;&lt;/li&gt;
+[% END %] </code></pre>
 <ul>
 <li>use of ternary operator</li>
 </ul>
-[% IF may_create_list; %]
-<li>
-<a class="[% action == 'create_list_request' ?  'MainMenuLinksCurrentPage' : 'MainMenuLinks' %]" href="[% path_cgi %]/create_list_request" >[% &quot;Create list&quot;|loc %]</a>
-</li>
-<p>[% END %]</p>
-[% IF may_create_list; class = action == 'create_list_request' ? 'MainMenuLinksCurrentPage' : 'MainMenuLinks'; END %]
-<li>
-<a class="[% class %]" href="[% path_cgi %]/create_list_request" >[%|loc%]Create list[%END%]</a>
-</li>
-<p>[% END %]</p><span class="dynamic-px-width"></span></section></div>
+<pre class="tt2"><code>    [% IF may_create_list;
+    %]&lt;li&gt;&lt;a class=&quot;[% action == &#39;create_list_request&#39; ?  &#39;MainMenuLinksCurrentPage&#39; : &#39;MainMenuLinks&#39; %]&quot; href=&quot;[% path_cgi %]/create_list_request&quot; &gt;[% &quot;Create list&quot;|loc %]&lt;/a&gt;&lt;/li&gt;
+    [% END %] 
+
+
+    [% IF may_create_list;
+    class = action == &#39;create_list_request&#39; ?  &#39;MainMenuLinksCurrentPage&#39; : &#39;MainMenuLinks&#39;;
+    END %]&lt;li&gt;&lt;a class=&quot;[% class %]&quot; href=&quot;[% path_cgi %]/create_list_request&quot; &gt;[%|loc%]Create list[%END%]&lt;/a&gt;&lt;/li&gt;
+    [% END %]</code></pre><span class="dynamic-px-width"></span></section></div>
   </main>
 </div>
 --> 
 
 </body>
-<script src="../../behave.js"></script>
+<script src="./behave.js"></script>
 <script src="js/vendor/modernizr-2.6.2-respond-1.1.0.min.js"></script>
 <script src="http://django-static.u-strasbg.fr/dipstrap/latest/js/vendor/jquery-1.11.0.min.js"></script>
 <script src="http://django-static.u-strasbg.fr/dipstrap/latest/js/vendor/bootstrap.min.js"></script>
