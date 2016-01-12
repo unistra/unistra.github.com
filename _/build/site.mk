@@ -15,7 +15,8 @@ pages_src         = $(wildcard *.md )
 pages             = $(pages_src:.md=.html)
 
 pandoc           ?= pandoc -Vdepth=$(depth)
-pandoc_html       = $(pandoc) -t html+$(pandoc_extensions)
+pandoc_html       = $(pandoc) -t html+$(pandoc_extensions) \
+		    --highlight-style=kate
 pandoc_page       = $(pandoc_html) --toc -B menu --template $(html_tmpl)
 
 pandoc_extensions ?= \
