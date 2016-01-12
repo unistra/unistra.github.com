@@ -20,6 +20,13 @@ pandoc_page = $(pandoc_html) --toc -B menu --template $(html_tmpl)
 #all: $(pages) look.css behave.js
 all: $(pages) look.css
 
+menu: menu.md.
+	@ echo update menu
+	@ { $(pandoc_html) |$(postdef)} < $< > $@
+
+$(pages): $(html_tmpl) $(m4defs) menu
+
+
 %.html: %.md
 	{ $(pandoc_page) |$(postdef)} < $< > $@
 
