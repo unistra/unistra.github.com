@@ -1,0 +1,205 @@
+<!DOCTYPE html><html>
+<head><meta charset="utf-8" />
+<meta http-equiv="x-ua-compatible" content="ie=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1" />
+<link rel="stylesheet" href="../look.css" />
+<link rel="stylesheet" href="http://django-static.u-strasbg.fr/dipstrap/latest/css/bootstrap-unistra.min.css">
+<link rel="stylesheet" href="http://django-static.u-strasbg.fr/dipstrap/latest/css/bootstrap-theme-unistra.min.css">
+<link rel="stylesheet" href="http://django-static.u-strasbg.fr/dipstrap/latest/css/main.css">
+
+
+<title>trucs et astuces git</title>
+
+
+
+
+</head><body>
+
+ <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <img class="pull-left" src="../img/unistra-white.png" alt="unistra" />
+      <div class="container">
+<!--
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+-->
+          <a class="navbar-brand" href="#">Github Unistra</a>
+        </div>
+<!--
+        <div class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+            <li class="active"><a href="#">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#contact">Contact</a></li>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
+              <ul class="dropdown-menu">
+                <li><a href="#">Action</a></li>
+                <li><a href="#">Another action</a></li>
+                <li><a href="#">Something else here</a></li>
+                <li class="divider"></li>
+                <li class="dropdown-header">Nav header</li>
+                <li><a href="#">Separated link</a></li>
+                <li><a href="#">One more separated link</a></li>
+              </ul>
+            </li>
+          </ul>
+           <form class="navbar-form navbar-right" role="form">
+            <div class="form-group">
+              <input type="text" placeholder="Email" class="form-control">
+            </div>
+            <div class="form-group">
+              <input type="password" placeholder="Password" class="form-control">
+            </div>
+            <button type="submit" class="btn btn-success">Sign in</button>
+          </form>
+        </div>
+      </div>
+-->
+    </div>
+
+<div class="container-fluid" style="margin-top: 2em">
+<div class="row-fluid">
+    <div class="col-md-2">
+	
+  <nav id="TOC">
+      <ul>
+      <li><a href="#alias-qui-vont-bien">alias qui vont bien</a></li>
+      <li><a href="#git-et-svn">git et svn</a></li>
+      <li><a href="#des-infos-git-dans-le-prompt-zsh">des infos git dans le prompt zsh</a></li>
+      <li><a href="#pour-montrer-quon-roxe">pour montrer qu'on roxe</a></li>
+      </ul></nav></div>
+</div>
+<div class="row-fluid">
+<div class="col-md-10"><h1>trucs et astuces git</h1><h1 id="alias-qui-vont-bien">alias qui vont bien</h1>
+<p>dans <code>.zshenv</code></p>
+<pre><code>alias g=git</code></pre>
+<p>ajouter des alias a git</p>
+<pre><code>git config --global alias.s=status -s
+git config --global alias.ci=commit
+git config --global alias.co=checkout
+git config --global alias.br=branch
+git config --global alias.aa=add -A
+git config -l # vérifions que tout est bien en place
+git config -e # éditons</code></pre>
+<p><code>g s</code> est maintenant équivalent à <code>git status -s</code></p>
+<p>dans votre ~/.ssh/config, ajoutez</p>
+<pre><code>Host gh
+Hostname github.com
+User git</code></pre>
+<p>vous pouvez maintenant tapper</p>
+<pre><code>g clone gh:eiro/p5-perlude</code></pre>
+<h1 id="git-et-svn">git et svn</h1>
+<p>il est possible de maintenir un depot git qui puisse faire un rebase avec une série de patches venus d'un serveur SVN. c'est ce que je fais avec <a href="http://sympa.org">sympa</a>.</p>
+<pre><code>git svn clone https://subversion.renater.fr/sympa/branches/sympa-6.1-branch sympa
+cd sympa
+git remote add origin git@github.com:eiro/sympa.git
+git push -u origin master</code></pre>
+<p>et de temps en temps</p>
+<pre><code>git svn fetch
+git svn rebase</code></pre>
+<p>du coup mes devs sont dans une branche devel que je sync depuis master. POINT! il serait pe plus simple de maintenir le git dans une branche 'mainstream'. pas cherché.</p>
+<h1 id="des-infos-git-dans-le-prompt-zsh">des infos git dans le prompt zsh</h1>
+<p>precmd est une commande qui est lancée par zsh avant chaque affichage de prompt. par defaut elle ne fait rien mais il est possible de la surcharger.</p>
+<pre><code>shush2 ()  &quot;$@&quot; 2&gt; /dev/null 
+git_whatsup () 
+    local up=&quot;$(shush2 git log -1 --format=&#39;%d&#39;)&quot;
+    [[ -n $up ]] &amp;&amp; print &quot;$up + $( shush2 git status -s |wc -l) modifs&quot;
+
+precmd ()  export PS1=&quot;[%T] %n@%M%b:%~ |$(git_whatsup )&quot;$&#39;\n&#39;&quot;&gt; &quot; </code></pre>
+<h1 id="pour-montrer-quon-roxe">pour montrer qu'on roxe</h1>
+<p>Depuis git 1.7.9 on peut signer ses commits (la classe nan ?)</p>
+<pre><code>~# gpg --list-keys
+...
+pub   2048R/86CBFE18 1970-01-01
+uid   t0mab</code></pre>
+<p>Une fois qu'on a identifié la clé qui va bien on configure git aux petits oignons</p>
+<pre><code>~# git config --global user.signingkey 86CBFE18</code></pre>
+<p>Ensuite on peut signer ses commits à l'aide de l'option -S de git</p>
+<pre><code>~# git commit -S</code></pre>
+<p>Ensuite pour verifier l'origine des commits :</p>
+<pre><code>~# git log --show-signature
+
+commit 06bc0d1801dc21f8fa0a4842124705b6105206d1
+gpg: Signature faite le mar. 12 févr. 2013 17:13:23 CET avec la clé RSA ID 86CBFE18
+gpg: Bonne signature de « Trauma Bagai &lt;nospam@somewhere.fr&gt; »
+Author: Trauma Bagai &lt;nospam@somewhere.fr&gt;
+Date:   Tue Feb 12 17:12:39 2013 +0100</code></pre></div>
+</div>
+</div>
+
+<!-- <div id="wrapper"><header role="banner" class="grid-container">
+    <div class="grid-100">Unistra on github</div></header>
+  <main role="main" class="grid-container">
+  <div class="grid-20"><section>
+  </section>
+<div class="grid-80">
+    <section class="content"
+    ><h1 id="alias-qui-vont-bien">alias qui vont bien</h1>
+<p>dans <code>.zshenv</code></p>
+<pre><code>alias g=git</code></pre>
+<p>ajouter des alias a git</p>
+<pre><code>git config --global alias.s=status -s
+git config --global alias.ci=commit
+git config --global alias.co=checkout
+git config --global alias.br=branch
+git config --global alias.aa=add -A
+git config -l # vérifions que tout est bien en place
+git config -e # éditons</code></pre>
+<p><code>g s</code> est maintenant équivalent à <code>git status -s</code></p>
+<p>dans votre ~/.ssh/config, ajoutez</p>
+<pre><code>Host gh
+Hostname github.com
+User git</code></pre>
+<p>vous pouvez maintenant tapper</p>
+<pre><code>g clone gh:eiro/p5-perlude</code></pre>
+<h1 id="git-et-svn">git et svn</h1>
+<p>il est possible de maintenir un depot git qui puisse faire un rebase avec une série de patches venus d'un serveur SVN. c'est ce que je fais avec <a href="http://sympa.org">sympa</a>.</p>
+<pre><code>git svn clone https://subversion.renater.fr/sympa/branches/sympa-6.1-branch sympa
+cd sympa
+git remote add origin git@github.com:eiro/sympa.git
+git push -u origin master</code></pre>
+<p>et de temps en temps</p>
+<pre><code>git svn fetch
+git svn rebase</code></pre>
+<p>du coup mes devs sont dans une branche devel que je sync depuis master. POINT! il serait pe plus simple de maintenir le git dans une branche 'mainstream'. pas cherché.</p>
+<h1 id="des-infos-git-dans-le-prompt-zsh">des infos git dans le prompt zsh</h1>
+<p>precmd est une commande qui est lancée par zsh avant chaque affichage de prompt. par defaut elle ne fait rien mais il est possible de la surcharger.</p>
+<pre><code>shush2 ()  &quot;$@&quot; 2&gt; /dev/null 
+git_whatsup () 
+    local up=&quot;$(shush2 git log -1 --format=&#39;%d&#39;)&quot;
+    [[ -n $up ]] &amp;&amp; print &quot;$up + $( shush2 git status -s |wc -l) modifs&quot;
+
+precmd ()  export PS1=&quot;[%T] %n@%M%b:%~ |$(git_whatsup )&quot;$&#39;\n&#39;&quot;&gt; &quot; </code></pre>
+<h1 id="pour-montrer-quon-roxe">pour montrer qu'on roxe</h1>
+<p>Depuis git 1.7.9 on peut signer ses commits (la classe nan ?)</p>
+<pre><code>~# gpg --list-keys
+...
+pub   2048R/86CBFE18 1970-01-01
+uid   t0mab</code></pre>
+<p>Une fois qu'on a identifié la clé qui va bien on configure git aux petits oignons</p>
+<pre><code>~# git config --global user.signingkey 86CBFE18</code></pre>
+<p>Ensuite on peut signer ses commits à l'aide de l'option -S de git</p>
+<pre><code>~# git commit -S</code></pre>
+<p>Ensuite pour verifier l'origine des commits :</p>
+<pre><code>~# git log --show-signature
+
+commit 06bc0d1801dc21f8fa0a4842124705b6105206d1
+gpg: Signature faite le mar. 12 févr. 2013 17:13:23 CET avec la clé RSA ID 86CBFE18
+gpg: Bonne signature de « Trauma Bagai &lt;nospam@somewhere.fr&gt; »
+Author: Trauma Bagai &lt;nospam@somewhere.fr&gt;
+Date:   Tue Feb 12 17:12:39 2013 +0100</code></pre><span class="dynamic-px-width"></span></section></div>
+  </main>
+</div>
+--> 
+
+</body>
+<script src="../behave.js"></script>
+<script src="js/vendor/modernizr-2.6.2-respond-1.1.0.min.js"></script>
+<script src="http://django-static.u-strasbg.fr/dipstrap/latest/js/vendor/jquery-1.11.0.min.js"></script>
+<script src="http://django-static.u-strasbg.fr/dipstrap/latest/js/vendor/bootstrap.min.js"></script>
+</html>

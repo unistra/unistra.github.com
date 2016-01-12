@@ -10,7 +10,8 @@ Dépot des documents communautaires de la direction informatique de l'universit�
 
 * [Perl pitfalls](dev/perl/pitfalls.html) document écrit pour remplacer la section actuelle de la doc de sympa
 * [Perl TT2](dev/perl/tt2.html) TT2 coding style pour sympa
-* [Perl Deploy](dev/perl/modules.md) installation de modules avec perl
-
+* [Perl Deploy](dev/perl/modules.html) installation de modules avec perl
 
 [random notes](notes.html)
+
+

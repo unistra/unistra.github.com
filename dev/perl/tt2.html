@@ -1,0 +1,167 @@
+<!DOCTYPE html><html>
+<head><meta charset="utf-8" />
+<meta http-equiv="x-ua-compatible" content="ie=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1" />
+<link rel="stylesheet" href="../../look.css" />
+<link rel="stylesheet" href="http://django-static.u-strasbg.fr/dipstrap/latest/css/bootstrap-unistra.min.css">
+<link rel="stylesheet" href="http://django-static.u-strasbg.fr/dipstrap/latest/css/bootstrap-theme-unistra.min.css">
+<link rel="stylesheet" href="http://django-static.u-strasbg.fr/dipstrap/latest/css/main.css">
+
+
+<title></title>
+
+
+
+
+</head><body>
+
+ <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <img class="pull-left" src="../../img/unistra-white.png" alt="unistra" />
+      <div class="container">
+<!--
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+-->
+          <a class="navbar-brand" href="#">Github Unistra</a>
+        </div>
+<!--
+        <div class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+            <li class="active"><a href="#">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#contact">Contact</a></li>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
+              <ul class="dropdown-menu">
+                <li><a href="#">Action</a></li>
+                <li><a href="#">Another action</a></li>
+                <li><a href="#">Something else here</a></li>
+                <li class="divider"></li>
+                <li class="dropdown-header">Nav header</li>
+                <li><a href="#">Separated link</a></li>
+                <li><a href="#">One more separated link</a></li>
+              </ul>
+            </li>
+          </ul>
+           <form class="navbar-form navbar-right" role="form">
+            <div class="form-group">
+              <input type="text" placeholder="Email" class="form-control">
+            </div>
+            <div class="form-group">
+              <input type="password" placeholder="Password" class="form-control">
+            </div>
+            <button type="submit" class="btn btn-success">Sign in</button>
+          </form>
+        </div>
+      </div>
+-->
+    </div>
+
+<div class="container-fluid" style="margin-top: 2em">
+<div class="row-fluid">
+    <div class="col-md-2">
+	
+</div>
+</div>
+<div class="row-fluid">
+<div class="col-md-10"><p>notes a récurerer sur le serveur</p>
+[% IF may_create_list %][% IF action == 'create_list_request' %][% SET class = 'MainMenuLinksCurrentPage' %][% ELSE %][% SET class = 'MainMenuLinks' %][% END %]
+<li>
+<a class="[% class %]" href="[% path_cgi %]/create_list_request" >[%|loc%]Create list[%END%]</a>
+</li>
+<p>[% END %]</p>
+<p>devient:</p>
+[% IF may_create_list; IF action == 'create_list_request'; SET class = 'MainMenuLinksCurrentPage'; ELSE; SET class = 'MainMenuLinks'; END %]
+<li>
+<a class="[% class %]" href="[% path_cgi %]/create_list_request" >[%|loc%]Create list[%END%]</a>
+</li>
+<p>[% END %]</p>
+<ul>
+<li>[%|loc%]A text[%END%] peut etre écrit [% &quot;A text&quot; | loc %]<br />
+</li>
+<li>SET class = 'MainMenuLinksCurrentPage' ( le SET est facultatif)<br />
+</li>
+<li>class = 'MainMenuLinksCurrentPage'</li>
+</ul>
+[% IF may_create_list; IF action == 'create_list_request'; class = 'MainMenuLinksCurrentPage'; ELSE; class = 'MainMenuLinks'; END %]
+<li>
+<a class="[% class %]" href="[% path_cgi %]/create_list_request"
+    >[% &quot;Create list&quot;|loc %]</a>
+</li>
+<p>[% END %]</p>
+<ul>
+<li>use of ternary operator</li>
+</ul>
+[% IF may_create_list; %]
+<li>
+<a class="[% action == 'create_list_request' ?  'MainMenuLinksCurrentPage' : 'MainMenuLinks' %]" href="[% path_cgi %]/create_list_request" >[% &quot;Create list&quot;|loc %]</a>
+</li>
+<p>[% END %]</p>
+[% IF may_create_list; class = action == 'create_list_request' ? 'MainMenuLinksCurrentPage' : 'MainMenuLinks'; END %]
+<li>
+<a class="[% class %]" href="[% path_cgi %]/create_list_request" >[%|loc%]Create list[%END%]</a>
+</li>
+<p>[% END %]</p></div>
+</div>
+</div>
+
+<!-- <div id="wrapper"><header role="banner" class="grid-container">
+    <div class="grid-100">Unistra on github</div></header>
+  <main role="main" class="grid-container">
+  <div class="grid-20"><section>
+  </section>
+<div class="grid-80">
+    <section class="content"
+    ><p>notes a récurerer sur le serveur</p>
+[% IF may_create_list %][% IF action == 'create_list_request' %][% SET class = 'MainMenuLinksCurrentPage' %][% ELSE %][% SET class = 'MainMenuLinks' %][% END %]
+<li>
+<a class="[% class %]" href="[% path_cgi %]/create_list_request" >[%|loc%]Create list[%END%]</a>
+</li>
+<p>[% END %]</p>
+<p>devient:</p>
+[% IF may_create_list; IF action == 'create_list_request'; SET class = 'MainMenuLinksCurrentPage'; ELSE; SET class = 'MainMenuLinks'; END %]
+<li>
+<a class="[% class %]" href="[% path_cgi %]/create_list_request" >[%|loc%]Create list[%END%]</a>
+</li>
+<p>[% END %]</p>
+<ul>
+<li>[%|loc%]A text[%END%] peut etre écrit [% &quot;A text&quot; | loc %]<br />
+</li>
+<li>SET class = 'MainMenuLinksCurrentPage' ( le SET est facultatif)<br />
+</li>
+<li>class = 'MainMenuLinksCurrentPage'</li>
+</ul>
+[% IF may_create_list; IF action == 'create_list_request'; class = 'MainMenuLinksCurrentPage'; ELSE; class = 'MainMenuLinks'; END %]
+<li>
+<a class="[% class %]" href="[% path_cgi %]/create_list_request"
+    >[% &quot;Create list&quot;|loc %]</a>
+</li>
+<p>[% END %]</p>
+<ul>
+<li>use of ternary operator</li>
+</ul>
+[% IF may_create_list; %]
+<li>
+<a class="[% action == 'create_list_request' ?  'MainMenuLinksCurrentPage' : 'MainMenuLinks' %]" href="[% path_cgi %]/create_list_request" >[% &quot;Create list&quot;|loc %]</a>
+</li>
+<p>[% END %]</p>
+[% IF may_create_list; class = action == 'create_list_request' ? 'MainMenuLinksCurrentPage' : 'MainMenuLinks'; END %]
+<li>
+<a class="[% class %]" href="[% path_cgi %]/create_list_request" >[%|loc%]Create list[%END%]</a>
+</li>
+<p>[% END %]</p><span class="dynamic-px-width"></span></section></div>
+  </main>
+</div>
+--> 
+
+</body>
+<script src="../../behave.js"></script>
+<script src="js/vendor/modernizr-2.6.2-respond-1.1.0.min.js"></script>
+<script src="http://django-static.u-strasbg.fr/dipstrap/latest/js/vendor/jquery-1.11.0.min.js"></script>
+<script src="http://django-static.u-strasbg.fr/dipstrap/latest/js/vendor/bootstrap.min.js"></script>
+</html>
