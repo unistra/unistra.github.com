@@ -2,24 +2,100 @@
 <head><meta charset="utf-8" />
 <meta http-equiv="x-ua-compatible" content="ie=edge" />
 <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1" />
-<link rel="stylesheet" href="./unsemantic.css"/>
-<link rel="stylesheet" href="./theme.css" />
-<link href='http://fonts.googleapis.com/css?family=Orbitron' rel='stylesheet' type='text/css'> 
+<link rel="stylesheet" href="./look.css" />
+<link rel="stylesheet" href="http://django-static.u-strasbg.fr/dipstrap/latest/css/bootstrap-unistra.min.css">
+<link rel="stylesheet" href="http://django-static.u-strasbg.fr/dipstrap/latest/css/bootstrap-theme-unistra.min.css">
+<link rel="stylesheet" href="http://django-static.u-strasbg.fr/dipstrap/latest/css/main.css">
 
 
-<title>Unistra on Github</title>
+<title></title>
 
 
 
 
-</head><body >
-    <div id="wrapper"><header role="banner" class="grid-container">
+</head><body>
+
+ <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <img class="pull-left" src="img/unistra-white.png" alt="unistra" />
+      <div class="container">
+<!--
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+-->
+          <a class="navbar-brand" href="#">Github Unistra</a>
+        </div>
+<!--
+        <div class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+            <li class="active"><a href="#">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#contact">Contact</a></li>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
+              <ul class="dropdown-menu">
+                <li><a href="#">Action</a></li>
+                <li><a href="#">Another action</a></li>
+                <li><a href="#">Something else here</a></li>
+                <li class="divider"></li>
+                <li class="dropdown-header">Nav header</li>
+                <li><a href="#">Separated link</a></li>
+                <li><a href="#">One more separated link</a></li>
+              </ul>
+            </li>
+          </ul>
+           <form class="navbar-form navbar-right" role="form">
+            <div class="form-group">
+              <input type="text" placeholder="Email" class="form-control">
+            </div>
+            <div class="form-group">
+              <input type="password" placeholder="Password" class="form-control">
+            </div>
+            <button type="submit" class="btn btn-success">Sign in</button>
+          </form>
+        </div>
+      </div>
+-->
+    </div>
+
+<div class="container-fluid" style="margin-top: 2em">
+<div class="row-fluid">
+    <div class="col-md-2">
+	
+  <nav id="TOC">
+      <ul>
+      <li><a href="#documentation">Documentation</a></li>
+      </ul></nav></div>
+</div>
+<div class="row-fluid">
+<div class="col-md-10"><p>Dépot des documents communautaires de la direction informatique de l'université de Strasbourg.</p>
+<ul>
+<li><a href="http://github.com/unistra">dépots de codes source</a></li>
+<li><a href="doc/">documentation</a></li>
+<li><a href="talks/">présentations effectuées par des membres de la direction</a></li>
+<li><a href="tips/">notes et astuces</a></li>
+<li><a href="dev/">page des devs</a></li>
+</ul>
+<h1 id="documentation">Documentation</h1>
+<ul>
+<li><a href="dev/perl/pitfalls.html">Perl pitfalls</a> document écrit pour remplacer la section actuelle de la doc de sympa</li>
+<li><a href="dev/perl/tt2.html">Perl TT2</a> TT2 coding style pour sympa</li>
+<li><a href="dev/perl/modules.md">Perl Deploy</a> installation de modules avec perl</li>
+</ul>
+<p><a href="notes.html">random notes</a></p></div>
+</div>
+</div>
+
+<!-- <div id="wrapper"><header role="banner" class="grid-container">
     <div class="grid-100">Unistra on github</div></header>
   <main role="main" class="grid-container">
-  <div class="grid-20"><section></section><hr width="100%"/><nav id="TOC"><ul>
-<li><a href="#documentation">Documentation</a></li>
-</ul></nav></div>
-<div class="grid-80"><h1>Unistra on Github</h1>
+  <div class="grid-20"><section>
+  </section>
+<div class="grid-80">
     <section class="content"
     ><p>Dépot des documents communautaires de la direction informatique de l'université de Strasbourg.</p>
 <ul>
@@ -35,7 +111,14 @@
 <li><a href="dev/perl/tt2.html">Perl TT2</a> TT2 coding style pour sympa</li>
 <li><a href="dev/perl/modules.md">Perl Deploy</a> installation de modules avec perl</li>
 </ul>
-<p><a href="notes.html">random notes</a></p><span class="dynamic-px-width"></span></section></div> 
+<p><a href="notes.html">random notes</a></p><span class="dynamic-px-width"></span></section></div>
   </main>
-</div> 
-</body><script src="./behave.js"></script></html>
+</div>
+--> 
+
+</body>
+<script src="./behave.js"></script>
+<script src="js/vendor/modernizr-2.6.2-respond-1.1.0.min.js"></script>
+<script src="http://django-static.u-strasbg.fr/dipstrap/latest/js/vendor/jquery-1.11.0.min.js"></script>
+<script src="http://django-static.u-strasbg.fr/dipstrap/latest/js/vendor/bootstrap.min.js"></script>
+</html>

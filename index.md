@@ -1,5 +1,3 @@
-% Unistra on Github
-
 Dépot des documents communautaires de la direction informatique de l'université de Strasbourg.
 
 * [dépots de codes source](http://github.com/unistra)
