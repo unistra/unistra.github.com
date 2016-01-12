@@ -1,2 +1,5 @@
-depth=.
-include $(depth)/_build/site.mk
+depth?=.
+subdirs= dev/perl
+
+include $(depth)/_/build/site.mk
+
