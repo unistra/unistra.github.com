@@ -28,7 +28,8 @@ $(pages): $(html_tmpl) $(m4defs) menu
 
 
 %.html: %.md
-	{ $(pandoc_page) |$(postdef)} < $< > $@
+	@ echo update page $@
+	@ { $(pandoc_page) |$(postdef)} < $< > $@
 
 %.css: %.us
 	stylus -c $<
@@ -40,4 +41,5 @@ $(pages): $(html_tmpl) $(m4defs) menu
 	$(pandoc) -s -t beamer+$(pandoc_extensions) -o $@ $<
 
 $(m4defs): $(rc)/keywords
-	perl $(rc)/bin/m4keys  $< > $@
+	@ echo definitions
+	@ perl $(rc)/bin/m4keys  $< > $@
