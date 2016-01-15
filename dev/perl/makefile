@@ -1,0 +1,2 @@
+depth=../..
+include $(depth)/makefile

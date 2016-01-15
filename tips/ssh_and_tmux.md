@@ -102,14 +102,14 @@ la plupart des commandes tmux lancées se résument à ces 3 usages. t est un al
 * 't' liste les sessions existantes
 * 't foo' s'attache foo si elle existe, la crée si besoin
 
-    t () {
-	(( $+1 )) || {
-	    tmux ls | sed 's/:.*//'
-	    return
+	t () {
+	    (( $+1 )) || {
+		tmux ls | sed 's/:.*//'
+		return
+	    }
+	    tmux att -t $1 ||
+		tmux new -s $1
 	}
-	tmux att -t $1 ||
-	    tmux new -s $1
-    }
 
 # inviter un collègue sur sa session tmux
 
