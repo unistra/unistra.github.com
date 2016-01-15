@@ -1,14 +1,13 @@
 export SHELL  = /bin/zsh
 
 depth            ?= .
-builder          ?= $(depth)/_/build
+make_site        ?= $(depth)/_/make
 site             ?= $(depth)/_/site
 html_tmpl        ?= $(site)/template.html
 
-m4builder        ?= $(builder)/m4
+m4make_site      ?= $(make_site)/m4
 m4site           ?= $(site)/m4
-m4defs           ?= $(m4site)/defs
-m4               ?= m4 -I $(m4site) -I$(m4builder)
+m4               ?= m4 -I $(m4site) -I$(m4make_site)
 postdef           = $(m4) post defs render -
 
 pages_src         = $(wildcard *.md )
@@ -23,14 +22,11 @@ pandoc_extensions ?= \
      pipe_tables+grid_tables+multiline_tables+escaped_line_breaks
 
 all: $(pages)
-ifndef csub
-	for it ($(subdirs)) { \
-	    depth=$${it//[^\/]##/..} ;\
-	    print "making subdir $$it (depth=$$depth)\n" ;\
-	    make -C $$it -f $$depth/Makefile depth=$$depth csub=$$it }
-endif
 
-$(pages): $(html_tmpl) $(m4defs) menu
+# $(pages): $(html_tmpl) $(m4defs) menu
+
+site: $(page)
+	for it ($(sections)) (cd $$it; make &);wait
 
 menu: menu.md.
 	@ echo update menu
@@ -49,7 +45,16 @@ menu: menu.md.
 %.latex %.pdf: %.md
 	$(pandoc) -s -t beamer+$(pandoc_extensions) -o $@ $<
 
+ifdef no-defs
+
 $(m4defs): $(site)/keywords
 	@ echo update definitions
-	@ perl $(builder)/bin/m4keys  $< > $@
+	@ perl $(make_site)/bin/m4keys  $< > $@
+
+m4defs  ?= $(m4site)/defs
+
+else
+    m4defs =
+endif
+
 
