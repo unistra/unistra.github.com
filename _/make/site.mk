@@ -28,6 +28,8 @@ all: $(pages)
 site: $(page)
 	for it ($(sections)) (cd $$it; make &);wait
 
+$(pages): $(html_tmpl)
+
 menu: menu.md.
 	@ echo update menu
 	@ { $(pandoc_html) |$(postdef)} < $< > $@
