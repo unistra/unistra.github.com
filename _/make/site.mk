@@ -41,6 +41,12 @@ info:
 
 $(pages): $(html_tmpl)
 
+ifeq ($(jade_tmpl),)
+else
+$(html_tmpl): $(jade_tmpl)
+	jade.js $<
+endif
+
 menu: menu.md.
 	@ echo update menu
 	@ { $(pandoc_html) |$(postdef)} < $< > $@
