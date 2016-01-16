@@ -1,84 +1,18 @@
-<!DOCTYPE html><html>
-<head><meta charset="utf-8" />
-<meta http-equiv="x-ua-compatible" content="ie=edge" />
-<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1" />
-<link rel="stylesheet" href="../look.css" />
-<link rel="stylesheet" href="http://django-static.u-strasbg.fr/dipstrap/latest/css/bootstrap-unistra.min.css">
-<link rel="stylesheet" href="http://django-static.u-strasbg.fr/dipstrap/latest/css/bootstrap-theme-unistra.min.css">
-<link rel="stylesheet" href="http://django-static.u-strasbg.fr/dipstrap/latest/css/main.css">
-
-
-<title>Trucs et astuces vim</title>
+<!DOCTYPE html><html><head><title>Trucs et astuces vim</title><meta charset="utf-8"><meta http-equiv="x-ua-compatible" content="ie=edge"><meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
 
 
 
 
-</head><body>
-
- <div class="navbar navbar-default navbar-fixed-top" role="navigation">
-    <img class="pull-left" src="../img/unistra-white.png" alt="unistra" />
-      <div class="container">
-<!--
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
--->
-          <a class="navbar-brand" href="#">Github Unistra</a>
-        </div>
-<!--
-        <div class="navbar-collapse collapse">
-          <ul class="nav navbar-nav">
-            <li class="active"><a href="#">Home</a></li>
-            <li><a href="#about">About</a></li>
-            <li><a href="#contact">Contact</a></li>
-            <li class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
-              <ul class="dropdown-menu">
-                <li><a href="#">Action</a></li>
-                <li><a href="#">Another action</a></li>
-                <li><a href="#">Something else here</a></li>
-                <li class="divider"></li>
-                <li class="dropdown-header">Nav header</li>
-                <li><a href="#">Separated link</a></li>
-                <li><a href="#">One more separated link</a></li>
-              </ul>
-            </li>
-          </ul>
-           <form class="navbar-form navbar-right" role="form">
-            <div class="form-group">
-              <input type="text" placeholder="Email" class="form-control">
-            </div>
-            <div class="form-group">
-              <input type="password" placeholder="Password" class="form-control">
-            </div>
-            <button type="submit" class="btn btn-success">Sign in</button>
-          </form>
-        </div>
-      </div>
--->
-    </div>
-
-<div class="container-fluid" style="margin-top: 2em">
-<div class="row-fluid">
-    <div class="col-md-2">
-	
-  <nav id="TOC">
-      <ul>
-      <li><a href="#configuration">configuration</a></li>
-      <li><a href="#best-of-normal">Best of normal</a></li>
-      <li><a href="#best-of-command">Best of command</a></li>
-      <li><a href="#editer-lhistorique-des-commandes-et-recherches">editer l'historique des commandes et recherches</a></li>
-      <li><a href="#toggle">toggle</a></li>
-      <li><a href="#remplir-son-buffer-grace-au-monde">remplir son buffer grace au monde</a></li>
-      <li><a href="#todo-va-mourrir-toi-et-ton-ide">TODO: va mourrir, toi et ton IDE!</a></li>
-      </ul></nav></div>
-</div>
-<div class="row-fluid">
-<div class="col-md-10"><h1>Trucs et astuces vim</h1><h1 id="configuration">configuration</h1>
+<link rel="stylesheet" href="../look.css"><link rel="stylesheet" href="http://django-static.u-strasbg.fr/dipstrap/latest/css/bootstrap-unistra.min.css"><link rel="stylesheet" href="http://django-static.u-strasbg.fr/dipstrap/latest/css/bootstrap-theme-unistra.min.css"><link rel="stylesheet" href="http://django-static.u-strasbg.fr/dipstrap/latest/css/main.css"></head><body><div role="navigation" class="navbar navbar-default navbar-fixed-top"><img src="../img/unistra-white.png" alt="unistra" class="pull-left"><div class="container"><a href="#" class="navbar-brand"></a></div></div><div style="margin-top: 3em" class="container-fluid"><div class="row-fluid"><div class="col-md-2">
+<nav id="TOC"><ul>
+<li><a href="#configuration">configuration</a></li>
+<li><a href="#best-of-normal">Best of normal</a></li>
+<li><a href="#best-of-command">Best of command</a></li>
+<li><a href="#editer-lhistorique-des-commandes-et-recherches">editer l'historique des commandes et recherches</a></li>
+<li><a href="#toggle">toggle</a></li>
+<li><a href="#remplir-son-buffer-grace-au-monde">remplir son buffer grace au monde</a></li>
+<li><a href="#todo-va-mourrir-toi-et-ton-ide">TODO: va mourrir, toi et ton IDE!</a></li>
+</ul></nav></div><div class="row-fluid"></div></div><div class="col-md-10"><div class="col-md-10"><h1>Trucs et astuces vim</h1><h1 id="configuration">configuration</h1>
 <pre><code>set wim=longest,list    # completion décente
 set hlsearch incsearch  # highlight ce qui a été trouvé et ce qu&#39;on trouve
 set paste!              # pour éviter que la souris casse tout</code></pre>
@@ -113,60 +47,4 @@ nnoremap ,!n :set nu!&lt;cr&gt;</code></pre>
 <li>vimdiff</li>
 <li>omnicompletion</li>
 <li>eclim ?</li>
-</ul></div>
-</div>
-</div>
-
-<!-- <div id="wrapper"><header role="banner" class="grid-container">
-    <div class="grid-100">Unistra on github</div></header>
-  <main role="main" class="grid-container">
-  <div class="grid-20"><section>
-  </section>
-<div class="grid-80">
-    <section class="content"
-    ><h1 id="configuration">configuration</h1>
-<pre><code>set wim=longest,list    # completion décente
-set hlsearch incsearch  # highlight ce qui a été trouvé et ce qu&#39;on trouve
-set paste!              # pour éviter que la souris casse tout</code></pre>
-<h1 id="best-of-normal">Best of normal</h1>
-<pre><code>ZZ # enregistrer et quitter
-ZQ # quitter sans enregistrer
-*  # chercher la prochaine occurence du mot sur lequel on est
-ctrl-x-f # completer avec le nom d&#39;un fichier</code></pre>
-<h1 id="best-of-command">Best of command</h1>
-<pre><code>&lt;range&gt;v//   # comme grep -v
-&lt;range&gt;g//   # comme grep
-&lt;range&gt;s///  # comme sed
-&lt;range&gt;y a   # copie dans &quot;a
-&lt;range&gt;d     # supprime</code></pre>
-<h1 id="editer-lhistorique-des-commandes-et-recherches">editer l'historique des commandes et recherches</h1>
-<p>parceque vous voulez toute la puissance de vi quand vous éditez vos commandes</p>
-<pre><code>q:  # éditer l&#39;historique des commandes
-q:  # éditer l&#39;historique des recherches</code></pre>
-<p>si vous êtes déjà en mode commande (ou recherche), tappez ctrl-f.</p>
-<h1 id="toggle">toggle</h1>
-<pre><code>nnoremap ,!p :set paste!&lt;cr&gt;
-nnoremap ,!n :set nu!&lt;cr&gt;</code></pre>
-<h1 id="remplir-son-buffer-grace-au-monde">remplir son buffer grace au monde</h1>
-<p>! permet de piper du contenu à votre shell. ainsi</p>
-<pre><code>:!ls  &quot; affiche le résultat de ls
-:r!ls &quot; copie le résultat de ls dans votre fichier 
-:,$!sort &quot; trie toutes les lignes jusqu&#39;à la fin du fichier avec sort</code></pre>
-<h1 id="todo-va-mourrir-toi-et-ton-ide">TODO: va mourrir, toi et ton IDE!</h1>
-<ul>
-<li>navigation dans les fenetres, les buffers</li>
-<li>utilisation de vim comme filtre et navigation dans les répertoires, fichiers</li>
-<li>vimdiff</li>
-<li>omnicompletion</li>
-<li>eclim ?</li>
-</ul><span class="dynamic-px-width"></span></section></div>
-  </main>
-</div>
---> 
-
-</body>
-<script src="../behave.js"></script>
-<script src="js/vendor/modernizr-2.6.2-respond-1.1.0.min.js"></script>
-<script src="http://django-static.u-strasbg.fr/dipstrap/latest/js/vendor/jquery-1.11.0.min.js"></script>
-<script src="http://django-static.u-strasbg.fr/dipstrap/latest/js/vendor/bootstrap.min.js"></script>
-</html>
+</ul></div></div></div></div></body><script src="../behave.js"></script><script src="js/vendor/modernizr-2.6.2-respond-1.1.0.min.js"></script><script src="http://django-static.u-strasbg.fr/dipstrap/latest/js/vendor/jquery-1.11.0.min.js"></script><script src="http://django-static.u-strasbg.fr/dipstrap/latest/js/vendor/bootstrap.min.js"></script></html>

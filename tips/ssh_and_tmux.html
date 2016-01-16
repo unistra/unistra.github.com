@@ -1,86 +1,20 @@
-<!DOCTYPE html><html>
-<head><meta charset="utf-8" />
-<meta http-equiv="x-ua-compatible" content="ie=edge" />
-<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1" />
-<link rel="stylesheet" href="../look.css" />
-<link rel="stylesheet" href="http://django-static.u-strasbg.fr/dipstrap/latest/css/bootstrap-unistra.min.css">
-<link rel="stylesheet" href="http://django-static.u-strasbg.fr/dipstrap/latest/css/bootstrap-theme-unistra.min.css">
-<link rel="stylesheet" href="http://django-static.u-strasbg.fr/dipstrap/latest/css/main.css">
-
-
-<title>trucs et astuces ssh+tmux</title>
+<!DOCTYPE html><html><head><title>trucs et astuces ssh+tmux</title><meta charset="utf-8"><meta http-equiv="x-ua-compatible" content="ie=edge"><meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
 
 
 
 
-</head><body>
-
- <div class="navbar navbar-default navbar-fixed-top" role="navigation">
-    <img class="pull-left" src="../img/unistra-white.png" alt="unistra" />
-      <div class="container">
-<!--
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
--->
-          <a class="navbar-brand" href="#">Github Unistra</a>
-        </div>
-<!--
-        <div class="navbar-collapse collapse">
-          <ul class="nav navbar-nav">
-            <li class="active"><a href="#">Home</a></li>
-            <li><a href="#about">About</a></li>
-            <li><a href="#contact">Contact</a></li>
-            <li class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
-              <ul class="dropdown-menu">
-                <li><a href="#">Action</a></li>
-                <li><a href="#">Another action</a></li>
-                <li><a href="#">Something else here</a></li>
-                <li class="divider"></li>
-                <li class="dropdown-header">Nav header</li>
-                <li><a href="#">Separated link</a></li>
-                <li><a href="#">One more separated link</a></li>
-              </ul>
-            </li>
-          </ul>
-           <form class="navbar-form navbar-right" role="form">
-            <div class="form-group">
-              <input type="text" placeholder="Email" class="form-control">
-            </div>
-            <div class="form-group">
-              <input type="password" placeholder="Password" class="form-control">
-            </div>
-            <button type="submit" class="btn btn-success">Sign in</button>
-          </form>
-        </div>
-      </div>
--->
-    </div>
-
-<div class="container-fluid" style="margin-top: 2em">
-<div class="row-fluid">
-    <div class="col-md-2">
-	
-  <nav id="TOC">
-      <ul>
-      <li><a href="#configurer-votre-client-ssh-.sshconfig">configurer votre client ssh (~/.ssh/config)</a><ul>
-      <li><a href="#les-aliases">les aliases</a></li>
-      <li><a href="#forward-systèmatique-de-votre-agent">forward systèmatique de votre agent</a></li>
-      <li><a href="#ssh-proxy-command">ssh proxy command</a></li>
-      </ul></li>
-      <li><a href="#créer-un-pseudoterminal">créer un pseudoterminal</a></li>
-      <li><a href="#vimdiff-entre-2-machines">vimdiff entre 2 machines</a></li>
-      <li><a href="#t-lalias-pour-aller-plus-vite">t, l'alias pour aller plus vite</a></li>
-      <li><a href="#inviter-un-collègue-sur-sa-session-tmux">inviter un collègue sur sa session tmux</a></li>
-      </ul></nav></div>
-</div>
-<div class="row-fluid">
-<div class="col-md-10"><h1>trucs et astuces ssh+tmux</h1><h1 id="configurer-votre-client-ssh-.sshconfig">configurer votre client ssh (~/.ssh/config)</h1>
+<link rel="stylesheet" href="../look.css"><link rel="stylesheet" href="http://django-static.u-strasbg.fr/dipstrap/latest/css/bootstrap-unistra.min.css"><link rel="stylesheet" href="http://django-static.u-strasbg.fr/dipstrap/latest/css/bootstrap-theme-unistra.min.css"><link rel="stylesheet" href="http://django-static.u-strasbg.fr/dipstrap/latest/css/main.css"></head><body><div role="navigation" class="navbar navbar-default navbar-fixed-top"><img src="../img/unistra-white.png" alt="unistra" class="pull-left"><div class="container"><a href="#" class="navbar-brand"></a></div></div><div style="margin-top: 3em" class="container-fluid"><div class="row-fluid"><div class="col-md-2">
+<nav id="TOC"><ul>
+<li><a href="#configurer-votre-client-ssh-.sshconfig">configurer votre client ssh (~/.ssh/config)</a><ul>
+<li><a href="#les-aliases">les aliases</a></li>
+<li><a href="#forward-systèmatique-de-votre-agent">forward systèmatique de votre agent</a></li>
+<li><a href="#ssh-proxy-command">ssh proxy command</a></li>
+</ul></li>
+<li><a href="#créer-un-pseudoterminal">créer un pseudoterminal</a></li>
+<li><a href="#vimdiff-entre-2-machines">vimdiff entre 2 machines</a></li>
+<li><a href="#t-lalias-pour-aller-plus-vite">t, l'alias pour aller plus vite</a></li>
+<li><a href="#inviter-un-collègue-sur-sa-session-tmux">inviter un collègue sur sa session tmux</a></li>
+</ul></nav></div><div class="row-fluid"></div></div><div class="col-md-10"><div class="col-md-10"><h1>trucs et astuces ssh+tmux</h1><h1 id="configurer-votre-client-ssh-.sshconfig">configurer votre client ssh (~/.ssh/config)</h1>
 <p>vous pouvez configurer le comportement par defaut de votre client ssh et créer des aliases dans ~/.ssh/config. les directives s'appliquent à tous les hosts dont le motif de la ligne host est correct. Voilà qq bonnes recettes</p>
 <h2 id="les-aliases">les aliases</h2>
 <pre><code>Host gh
@@ -158,103 +92,4 @@ vimdiff scp://foo/.zshenv .zshenv</code></pre>
 <p>ajoutez les clefs de vos collègues dans vos '~/.ssh/authorized_keys' en préfixant les lignes par une commande qui sera forcée lors de la connexion.</p>
 <pre><code>command=&quot;tmux att -t hack&quot; ssh-dss AAAB3NzaC1kc3MAAA... jean@u</code></pre>
 <p>jean ne peut maintenant se connecter à votre machine (et avec votre identitée) que si une session &quot;hack&quot; y existe. renommez votre session de travail &quot;hack&quot; et invitez-le.</p>
-<pre><code>tmux rename-session hack</code></pre></div>
-</div>
-</div>
-
-<!-- <div id="wrapper"><header role="banner" class="grid-container">
-    <div class="grid-100">Unistra on github</div></header>
-  <main role="main" class="grid-container">
-  <div class="grid-20"><section>
-  </section>
-<div class="grid-80">
-    <section class="content"
-    ><h1 id="configurer-votre-client-ssh-.sshconfig">configurer votre client ssh (~/.ssh/config)</h1>
-<p>vous pouvez configurer le comportement par defaut de votre client ssh et créer des aliases dans ~/.ssh/config. les directives s'appliquent à tous les hosts dont le motif de la ligne host est correct. Voilà qq bonnes recettes</p>
-<h2 id="les-aliases">les aliases</h2>
-<pre><code>Host gh
-Hostname github.com
-User git
-
-Host foo
-Hostname foo.example.com
-User adm
-
-Host bar
-Hostname bar.example.com
-User adm</code></pre>
-<p>vous pouvez maintenant tapper</p>
-<ul>
-<li>'ssh foo' et non 'ssh adm@foo.example.com'</li>
-<li>'scp .zshenv foo:' et non 'ssh adm@foo.example.com'</li>
-</ul>
-<p>ça marche avec à peu prêt toutes les commandes (rsync, git, …), ainsi vous pouvez saisir</p>
-<p>git clone gh:unistra/unista.github.com</p>
-<p>pour cloner le dépot de ce site (si vous en avez les droits)</p>
-<h2 id="forward-systèmatique-de-votre-agent">forward systèmatique de votre agent</h2>
-<pre><code>Host *
-ForwardAgent yes</code></pre>
-<p>Votre agent sera maintenant systématiquement retransmis. Ainsi la commande qui suit ne vous demandera pas votre mot de passe sur bar.</p>
-<pre><code>ssh foo ssh bar ls</code></pre>
-<h2 id="ssh-proxy-command">ssh proxy command</h2>
-<p>vous pouvez utiliser une commande qui sera éxécutée par un mandataire pour se connecter à une autre machine</p>
-<p>soit:</p>
-<ul>
-<li>vous disposez d'un compte 'jo' sur foo</li>
-<li>foo protégée par du firewalling</li>
-<li>vous avez accès à bar, machine pour laquelle la règle de firewalling ne s'applique pas</li>
-<li>nc (netcat) est installée sur bar</li>
-</ul>
-<p>vous vous connectez à foo en transférant tout le traffic de bar via nc</p>
-<pre><code>Host foo
-Hostname foo.example.com
-User jo
-ProxyCommand ssh bar nc %h %p</code></pre>
-<p>vous tappez maintenant</p>
-<ul>
-<li><code>ssh foo ls</code> et non <code>ssh bar ssh foo ls</code></li>
-</ul>
-<p>vous pouvez aussi utiliser les outils traditionnels (scp, git, rsync, …) de manière transparente.</p>
-<h1 id="créer-un-pseudoterminal">créer un pseudoterminal</h1>
-<p>des commandes comme tmux, vim et autres nécessitent des que les tty soient correctement initialisées pour fonctionner. vous pouvez lancer ces commandes directement en forcant la création des tty:</p>
-<pre><code>ssh -t vim /etc/foo</code></pre>
-<h1 id="vimdiff-entre-2-machines">vimdiff entre 2 machines</h1>
-<p>il est possible d'éditer un fichier directement avec vim grace au protocole 'scp:', il est tout aussi simple de faire un diff entre deux machines:</p>
-<pre><code>vim scp://foo/.zshenv
-vimdiff scp://foo/.zshenv .zshenv</code></pre>
-<p>encore un petit alias qui va bien:</p>
-<pre><code>rediff () 
-    local f=$1
-    shift
-    vimdiff scp://$^@/$f $f
-</code></pre>
-<p>et maintenant: 'rediff .zshrc foo bar' ouvre un vimdiff avec les .zshrc de localhost, foo et bar</p>
-<h1 id="t-lalias-pour-aller-plus-vite">t, l'alias pour aller plus vite</h1>
-<p>surtout sur les serveurs, il est de bon ton d'utiliser des sessions nommées.</p>
-<ul>
-<li>pour créer une session nommée foo: tmux new -s foo</li>
-<li>pour s'attacher à une sesion nommée foo: tmux att -t foo</li>
-<li>pour voir la liste des sessions: tmux ls</li>
-</ul>
-<p>la plupart des commandes tmux lancées se résument à ces 3 usages. t est un alias qui simplifie tout çà:</p>
-<ul>
-<li>'t' liste les sessions existantes</li>
-<li><p>'t foo' s'attache foo si elle existe, la crée si besoin</p>
-<p>t ()  (( $+1 )) || { tmux ls | sed 's/:.*//' return } tmux att -t $1 || tmux new -s $1 </p></li>
-</ul>
-<h1 id="inviter-un-collègue-sur-sa-session-tmux">inviter un collègue sur sa session tmux</h1>
-<p>Afin d'inviter des collègues a travailler à distance sur son tmux,</p>
-<p>ajoutez les clefs de vos collègues dans vos '~/.ssh/authorized_keys' en préfixant les lignes par une commande qui sera forcée lors de la connexion.</p>
-<pre><code>command=&quot;tmux att -t hack&quot; ssh-dss AAAB3NzaC1kc3MAAA... jean@u</code></pre>
-<p>jean ne peut maintenant se connecter à votre machine (et avec votre identitée) que si une session &quot;hack&quot; y existe. renommez votre session de travail &quot;hack&quot; et invitez-le.</p>
-<pre><code>tmux rename-session hack</code></pre><span class="dynamic-px-width"></span></section></div>
-  </main>
-</div>
---> 
-
-</body>
-<script src="../behave.js"></script>
-<script src="js/vendor/modernizr-2.6.2-respond-1.1.0.min.js"></script>
-<script src="http://django-static.u-strasbg.fr/dipstrap/latest/js/vendor/jquery-1.11.0.min.js"></script>
-<script src="http://django-static.u-strasbg.fr/dipstrap/latest/js/vendor/bootstrap.min.js"></script>
-</html>
+<pre><code>tmux rename-session hack</code></pre></div></div></div></div></body><script src="../behave.js"></script><script src="js/vendor/modernizr-2.6.2-respond-1.1.0.min.js"></script><script src="http://django-static.u-strasbg.fr/dipstrap/latest/js/vendor/jquery-1.11.0.min.js"></script><script src="http://django-static.u-strasbg.fr/dipstrap/latest/js/vendor/bootstrap.min.js"></script></html>
