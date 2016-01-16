@@ -64,16 +64,15 @@ menu: menu.md.
 %.latex %.pdf: %.md
 	$(pandoc) -s -t beamer+$(pandoc_extensions) -o $@ $<
 
-ifdef no-defs
-
+ifeq ($(use-defs),no)
+    m4defs =
+else
 $(m4defs): $(site)/keywords
 	@ echo update definitions
 	@ perl $(make_site)/bin/m4keys  $< > $@
 
 m4defs  ?= $(m4site)/defs
 
-else
-    m4defs =
 endif
 
 
