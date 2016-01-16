@@ -1,10 +1,12 @@
-<!DOCTYPE html><html><head><title></title><meta charset="utf-8"><meta http-equiv="x-ua-compatible" content="ie=edge"><meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
+<!DOCTYPE html><html><head><title>Syympa TT2 guidelines</title><meta charset="utf-8"><meta http-equiv="x-ua-compatible" content="ie=edge"><meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
 
 
 
 
 <link rel="stylesheet" href="../../look.css"><link rel="stylesheet" href="http://django-static.u-strasbg.fr/dipstrap/latest/css/bootstrap-unistra.min.css"><link rel="stylesheet" href="http://django-static.u-strasbg.fr/dipstrap/latest/css/bootstrap-theme-unistra.min.css"><link rel="stylesheet" href="http://django-static.u-strasbg.fr/dipstrap/latest/css/main.css"></head><body><div role="navigation" class="navbar navbar-default navbar-fixed-top"><img src="../../img/unistra-white.png" alt="unistra" class="pull-left"><div class="container"><a href="#" class="navbar-brand"></a></div></div><div style="margin-top: 3em" class="container-fluid"><div class="row-fluid"><div class="col-md-2">
-</div><div class="row-fluid"></div></div><div class="col-md-10"><div class="col-md-10"><p>notes a récurerer sur le serveur</p>
+</div><div class="row-fluid"></div></div><div class="col-md-10"><div class="col-md-10"><h1>Syympa TT2 guidelines</h1><p>This is an exemple of template found in the current <a href="http://www.sympa.org">sympa</a> codebase. It is very similar to the examples you can find in the <a href="https://metacpan.org/release/Template-Toolkit">Template Toolkit documentation</a>. However, i think we can write better code using some extra features.</p>
+<p>This article is not a tutorial: it assumes you're already familiar with the TT2 syntax.</p>
+<p>so let's see</p>
 <pre class="tt2"><code>[% IF may_create_list %]
    [% IF action == &#39;create_list_request&#39; %]
        [% SET class = &#39;MainMenuLinksCurrentPage&#39; %]
@@ -13,38 +15,43 @@
    [% END %]&lt;li&gt;&lt;a class=&quot;[% class %]&quot; href=&quot;[%
     path_cgi %]/create_list_request&quot; &gt;[%|loc%]Create list[%END%]&lt;/a&gt;&lt;/li&gt;
 [% END %] </code></pre>
-<p>devient:</p>
-<pre class="tt2"><code>[% IF may_create_list;
-    IF action == &#39;create_list_request&#39;;
-        SET class = &#39;MainMenuLinksCurrentPage&#39;;
-    ELSE;
-        SET class = &#39;MainMenuLinks&#39;;
-    END;
-    %]&lt;li&gt;&lt;a class=&quot;[% class %]&quot; href=&quot;[% path_cgi %]/create_list_request&quot; &gt;[% &quot;Create list&quot; |loc %]&lt;/a&gt;&lt;/li&gt;[%
-END %] </code></pre>
 <ul>
-<li><code>[%|loc%]A text[%END%]</code> peut etre écrit <code>[% &quot;A text&quot; | loc %]</code></li>
-<li><code>SET class = 'MainMenuLinksCurrentPage'</code> ( le <code>SET</code> est facultatif)<br />
-</li>
-<li><code>class = 'MainMenuLinksCurrentPage'</code></li>
+<li><p>As filters can be used to anything you have to render, <code>[%|loc%]Create list[%END%]</code> may be rewritten as <code>[% &quot;Create list&quot; |loc %]</code>.</p></li>
+<li><p>The <code>SET</code> instruction is optionnal and can use ternary operator. so</p></li>
 </ul>
-<pre class="tt2"><code>[% IF may_create_list;
-    IF action == &#39;create_list_request&#39;;
-    class = &#39;MainMenuLinksCurrentPage&#39;;
-    ELSE;
-    class = &#39;MainMenuLinks&#39;;
-    END %]&lt;li&gt;&lt;a class=&quot;[% class %]&quot; href=&quot;[% path_cgi %]/create_list_request&quot;
-    &gt;[% &quot;Create list&quot;|loc %]&lt;/a&gt;&lt;/li&gt;
-[% END %] </code></pre>
+<pre class="tt2"><code>[% IF action == &#39;create_list_request&#39; %]
+   [% SET class = &#39;MainMenuLinksCurrentPage&#39; %]
+[% ELSE %]
+   [% SET class = &#39;MainMenuLinks&#39; %]
+[% END %]</code></pre>
+<p>can be rewritten as</p>
+<pre class="tt2"><code>[% class = action == &#39;create_list_request&#39;
+    ? &#39;MainMenuLinksCurrentPage&#39;
+    : &#39;MainMenuLinks&#39;;
+%]</code></pre>
 <ul>
-<li>use of ternary operator</li>
+<li>closing a template section is not needed as all the TT2 instructions can be separated with <code>;</code>. so</li>
 </ul>
-<pre class="tt2"><code>    [% IF may_create_list;
-    %]&lt;li&gt;&lt;a class=&quot;[% action == &#39;create_list_request&#39; ?  &#39;MainMenuLinksCurrentPage&#39; : &#39;MainMenuLinks&#39; %]&quot; href=&quot;[% path_cgi %]/create_list_request&quot; &gt;[% &quot;Create list&quot;|loc %]&lt;/a&gt;&lt;/li&gt;
-    [% END %] 
-
-
-    [% IF may_create_list;
-    class = action == &#39;create_list_request&#39; ?  &#39;MainMenuLinksCurrentPage&#39; : &#39;MainMenuLinks&#39;;
-    END %]&lt;li&gt;&lt;a class=&quot;[% class %]&quot; href=&quot;[% path_cgi %]/create_list_request&quot; &gt;[%|loc%]Create list[%END%]&lt;/a&gt;&lt;/li&gt;
-    [% END %]</code></pre></div></div></div></div></body><script src="../../behave.js"></script><script src="js/vendor/modernizr-2.6.2-respond-1.1.0.min.js"></script><script src="http://django-static.u-strasbg.fr/dipstrap/latest/js/vendor/jquery-1.11.0.min.js"></script><script src="http://django-static.u-strasbg.fr/dipstrap/latest/js/vendor/bootstrap.min.js"></script></html>
+<pre class="tt2"><code>[% IF may_create_list %]
+[% class = action == &#39;create_list_request&#39;
+    ? &#39;MainMenuLinksCurrentPage&#39;
+    : &#39;MainMenuLinks&#39;;
+%]
+[% END %]</code></pre>
+<p>can be written as</p>
+<pre class="tt2"><code>[% IF may_create_list;
+    class = action == &#39;create_list_request&#39;
+    ? &#39;MainMenuLinksCurrentPage&#39;
+    : &#39;MainMenuLinks&#39;;
+END %]</code></pre>
+<p>Put it all together and the final block is</p>
+<pre class="tt2"><code>[% IF may_create_list;
+    class = action == &#39;create_list_request&#39;
+    ? &#39;MainMenuLinksCurrentPage&#39;
+    : &#39;MainMenuLinks&#39;;
+   %]&lt;li&gt;&lt;a class=&quot;[% class %]&quot;[% 
+   %] href=&quot;[% path_cgi %]/create_list_request&quot;&gt;[%
+   &quot;Create list&quot; | loc;
+   %]&lt;/a&gt;&lt;/li&gt;[%
+END %]</code></pre>
+<p>more examples to come</p></div></div></div></div></body><script src="../../behave.js"></script><script src="js/vendor/modernizr-2.6.2-respond-1.1.0.min.js"></script><script src="http://django-static.u-strasbg.fr/dipstrap/latest/js/vendor/jquery-1.11.0.min.js"></script><script src="http://django-static.u-strasbg.fr/dipstrap/latest/js/vendor/bootstrap.min.js"></script></html>
