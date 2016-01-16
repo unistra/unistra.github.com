@@ -4,6 +4,10 @@ depth            ?= .
 make_site        ?= $(depth)/_/make
 site             ?= $(depth)/_/site
 html_tmpl        ?= $(site)/template.html
+jade_tmpl=$(shell t=$(html_tmpl); j=$$t:r.jade; test -f $$j && print $$j )
+
+# TODO: probably no by defaut when release public
+use-defs         ?= yes
 
 m4make_site      ?= $(make_site)/m4
 m4site           ?= $(site)/m4
@@ -25,8 +29,15 @@ all: $(pages)
 
 # $(pages): $(html_tmpl) $(m4defs) menu
 
-site: $(page)
-	for it ($(sections)) (cd $$it; make &);wait
+site: $(pages)
+	for it ($(sections)) (cd $$it; make);wait
+
+info:
+	@ echo html template: $(html_tmpl)
+	@ echo jade template: $(jade_tmpl)
+	@ echo options enable:
+	@ echo "    defs: $(use-defs)"
+
 
 $(pages): $(html_tmpl)
 
