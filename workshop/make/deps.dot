@@ -1,0 +1,25 @@
+digraph "dependencies" { 
+
+    template ->
+    { chap01_h
+    ; chap02_h
+    ; chap03_h
+    ; chap04_h }
+
+    chap01 -> { chap01_h ; all_h }
+    chap02 -> { chap02_h ; all_h }
+    chap03 -> { chap03_h ; all_h }
+    chap04 -> { chap04_h ; all_h }
+
+    us   -> css
+    jade -> template
+    ls   -> js
+
+    deps_gv -> deps_svg -> chap03
+    { css; js } ->
+    { chap01_h
+    , chap02_h
+    , chap03_h
+    , chap04_h }
+
+}

@@ -1,0 +1,41 @@
+digraph "dependencies" {
+
+    deps_gv -> deps_svg -> chap03_h;
+    chap01 -> chap01_h 
+    chap02 -> chap02_h
+    chap03 -> chap03_h
+    chap04 -> chap04_h
+
+    { chap01
+    ; chap02
+    ; chap03
+    ; chap04 } -> all_h
+
+    subgraph cluster_0 
+    { chap01_h 
+    ; chap02_h
+    ; chap03_h
+    ; chap04_h
+    ; all_h
+    color=blue; label=pages
+    } 
+
+    template ->
+    { chap01_h 
+    ; chap02_h
+    ; chap03_h
+    ; chap04_h
+    ; all_h }
+
+    // TODO:
+    // remove the tail inside the cluster
+    all_h -> all [ltail=cluster_0]
+    js    -> all [ltail=cluster_1]
+
+    us   -> css
+    ls   -> js
+    subgraph cluster_1
+    { css; js
+    color=red; label=ressources } 
+
+}
