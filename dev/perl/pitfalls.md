@@ -1,5 +1,8 @@
 # Perl pitfalls
 
+## Learn the values of Perl
+
+
 These are some things you should understand about Perl datastructures (and if
 you learn something there, maybe it's time to read all the perltut* from the
 perl distribution).
@@ -83,6 +86,9 @@ so:
     length '0' # true (converted to 1)
 ~~~
 
+(TODO: explain `&&` and `and` constructions)
+
+
 * perl autovivification
 
 If you challenge perl on nested datastructures, it will create everything
@@ -94,4 +100,24 @@ needed to anwser correctly so:
 
 needed to anwser correctly so even if `$my_hash{level1}` was empty, it will be
 filled with a `{ level2 => undef }` hashref in the mean to reply false.
+
+## Real perl pitfalls
+
+### Prototypes changes the way Perl works
+
+Once ou get the "flatten by default", you'll be surprised 
+
+### Prototypes changes the way Perl works
+
+## Frequent errors
+
+### print FH
+
+you probably made a mistake when you wrote
+
+    print STDERR, @msg;
+
+as there is no comma after the filehandle to print in. fix it:
+
+    print STDERR @msg;
 

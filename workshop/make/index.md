@@ -1,5 +1,6 @@
 ---
 author: Marc Chantreux
+title: make
 header-includes: \input{prelude.latex}
 ---
 # disclaimer
@@ -7,7 +8,7 @@ header-includes: \input{prelude.latex}
 * je débute, je n'ai pas lu le manuel, j'ai
     * lu des articles
     * lu des makefiles
-* je suis déjà très content (20h effect?)
+* 20h effect: ce que je sais me suffit
 
 # Exemple: construire son site web avec pandoc et zsh
 
@@ -27,14 +28,13 @@ for c ($chapters)
     $pandoc -o $c:r.html $c
 
 cat intro.md $chapters |
-    $pandoc > $all.html
+    $pandoc > all.html
 ~~~
 
 # problème
 
-le site est reconstruit intégralement à chaque execution.
-quelles sont les commandes à lancer pour reconstruire tout ou partie des
-fichiers. $\implies$ graph de dépendances.
+* le site est reconstruit intégralement à chaque execution.
+* réduire au minimum $\implies$ graphe de dépendances.
 
 \begin{flushleft}
 \only<2>{\includegraphics[width=1\textwidth]{deps.pdf}}
@@ -52,26 +52,37 @@ fichiers. $\implies$ graph de dépendances.
 
 > maintain (make) related files
 
-* make (mk, pmake, ...)
-* ses "successeurs" (cmake, scons, rake, daiku, grunt, ant, gradle, ...)
+* make (mk, pmake, GNU make ...)
+* ses "successeurs" \
+    (cmake, scons, rake, daiku, grunt, ant, gradle, ...)
 * [liste sur wikipedia](https://en.wikipedia.org/wiki/List_of_build_automation_software)
-* sous linux: [GNU make](https://www.gnu.org/software/make/manual/)
+* [GNU make](https://www.gnu.org/software/make/manual/), standard de facto sous linux.
 
-# pourquoi GNU make?
+# GNU make
 
-* à mon avis encore très utilisé
-    * `autotools`
-        * `m4`, `m4sh`, `make`
-        * utilisé par de nombreux projets OSS
-    * paquets debian:
-        * archives `ar`
-        * `control` est un `Makefile`
-* résoud la majorité des problèmes simplement
+les make-alike ont
 
+* largement et anciennement établis
+* jamais détronés
+* simples pour les problèmes simples
+* "extensible dans n'importe quel langage"
+
+exemples d'usages connus
+
+* `autotools`
+    * `m4`, `m4sh`, `make`
+    * utilisé par de nombreux projets OSS
+* paquets debian:
+    * archives `ar`
+    * `control` est un `Makefile`
 
 # makefile
 
-décrire le graph de dépendances sous la forme de règles
+* le fichier source
+* un langage pour décrire les graphs de dépendance
+* sous la forme de règles
+
+# les règles (rules)
 
 ## Cible (target)
 état à atteindre
@@ -83,17 +94,34 @@ décrire le graph de dépendances sous la forme de règles
 fichier nécessaire à la construction ou l'utilisation de la cible
 
 ## Commandes (command)
-commandes externes (`/bin/sh` par defaut) à executer pour construire la cible
+commandes externes à executer pour construire la cible
 
 # la commande make
 
-* s'assure que les cibles passées en argument (la première du makefile par défaut)
-  sont *à jour*.
-* *être à jour* c'est être plus récent que toutes ses dépendances
-* *contruire* une cible, c'est executer les commandes qui permettent de la mettre à jour
+* s'assure que _les cibles_ passées en argument (la première du makefile par défaut)
+  sont _à jour_.
+* être à jour c'est être _plus récent_ que toutes ses _dépendances_
+* _contruire_ une cible, c'est executer les commandes qui permettent de la mettre à jour
+
+# Construction
+
+* les commandes de construction sont executées par des subshells
+    * `/bin/sh` par defaut
+    * `SHELL= /usr/bin/zsh` pour plus de plaisir
+
 * la construction s'arrête si
       * une dépendance ne peut être construite
       * une commande ne s'est pas executée correctement (`$?`)
+
+# syntaxe
+
+* Attention: les commandes sont indentées avec une tabulation
+    * `syn on`
+    * `set hlsearch`
+    * `set list listchars=tab:>-`
+* les `\` protègent tous les caractères, fin de ligne y compris
+* les `$` du shell doivent être doublées dans les commandes
+* les `#` en début de ligne introduisent des commentaires
 
 # syntaxe
 
@@ -111,12 +139,6 @@ other-dependencies
     a lot of arguments
 ~~~
 
-# remarques sur la syntaxe
-
-* Attention: les commandes sont indentées avec une tabulation
-* Tip: utilisez la coloration syntaxique de vim
-* les `\` protègent tous les caractères, fin de ligne y compris
-* les `$` du shell doivent être doublées dans les commandes
 
 # hello world, makefile
 
@@ -173,16 +195,6 @@ hello2.txt:
         touch hello.txt
 ~~~
 
-QUESTION: que fait la commande `make` ?
-
-# réponse ...
-
-~~~{.zsh}
-make            # construit hello.txt
-make hello.txt  # construit hello.txt
-make hello2.txt # construit hello2.txt
-~~~
-
 # factoriser
 
 ~~~{.make}
@@ -205,15 +217,12 @@ hello.txt hello2.txt:
 # usage des variables automatiques
 
 ~~~{.make}
-
 behave.js:      behave.ls       ; lsc $<
 components.js:  components.ls   ; lsc $<
 bus.js:         bus.ls          ; lsc $<
-
-index.html: index.md template.html
-    pandoc \
-    -t html+pipe_tables+grid_tables+multiline_tables+escaped_line_breaks \
-    --toc -B menu --template -o $@ $<
+foo.svg:        foo.dot         ; dot -Tsvg -o $< $@
+bar.svg:        bar.dot         ; dot -Tsvg -o $< $@
+bang.svg:       bang.dot        ; dot -Tsvg -o $< $@
 ~~~
 
 # pattern matching
@@ -222,25 +231,37 @@ index.html: index.md template.html
 behave.js:      behave.ls       ; lsc $<
 components.js:  components.ls   ; lsc $<
 bus.js:         bus.ls          ; lsc $<
+foo.svg:        foo.dot         ; dot -Tsvg -o $< $@
+bar.svg:        bar.dot         ; dot -Tsvg -o $< $@
+bang.svg:       bang.dot        ; dot -Tsvg -o $< $@
 ~~~
 
 peut s'écrire
 
 ~~~{.make}
-%.js: %.ls ; lsc $<
+%.js     : %.ls   ; lsc $<
+%.svg:   : %.dot  ; dot -Tsvg -o $< $@
 ~~~
 
 # stem
 
-[pattern match](https://www.gnu.org/software/make/manual/html_node/Pattern-Match.html#Pattern-Match)
+le [pattern match](https://www.gnu.org/software/make/manual/html_node/Pattern-Match.html#Pattern-Match).
 
 * une règle peut trouver une cible avec
-  * un prefixe (fixe et optionnel)
-  * un "stem" (`%`)
-  * un suffixe (fixe et optionnel)
+    * un préfixe (fixe et optionnel)
+    * un "stem" (`%`)
+    * un suffixe (fixe et optionnel)
 * le stem trouvé est disponible
-  * par `%` dans les dépendances
-  * par la variable `$*` dans la construction
+    * par `%` dans les dépendances
+    * par la variable `$*` dans la construction
+
+# exemples
+
+|target|fichier|stem|
+|:-|:-|:-|
+|id_%\_key|`id_rsa_key.pub`|rsa|
+|mod.%|mod.enigma|enigma|
+|%.mod|enigma.mod|enigma|
 
 # Exercice
 
@@ -261,13 +282,21 @@ depuis le makefile ou en paramètre de `make`
 |||
 |-:|:-|
 | affectation        | `=`  |
+| append             | `+=` |
 | bind               | `:=` |
 | valeur par defaut  | `?=` |
+
+depuis la ligne de commande
+
+~~~{.zsh}
+    make all env=prod
+~~~
 
 ## interpolation
 
 ~~~{.make}
-$(nom-de-variable)
+$(rule): $(dep)
+    echo $(test)
 ~~~
 
 # variables (exemple)
@@ -289,20 +318,82 @@ slides.pdf slides.latex: $(components)
 	@echo DONE
 ~~~
 
-# affectation de variables
-
-depuis la ligne de commandes
-
-
 # conditions
+
+~~~{.make}
+ifeq ($(env),prod)
+    cc=gcc -O3
+else
+    cc=gcc
+endif
+
+ifndef env
+error.txt:; echo env not set > $@
+end
+~~~
+
+# phony rules
+
+~~~{.make}
+.PHONY: clean
+
+clean:; rm *
+~~~
+
+exemples courant: `all`, `dist`, `clean`
+
+# variables d'environement et inclusions
+
+## `a.mk`
+
+~~~{.make}
+ifeq ($(wowo),HAHA)
+    wowo=cool
+endif
+all:
+	make -f b.mk
+~~~
+
+## `b.mk`
+
+~~~{.make}
+b.mk:all:
+b.mk:	echo $(wowo) 
+~~~
+
+# dans le shell
+
+~~~{.raw}
+wowo=HAHA make -f a.mk
+
+make -f b.mk
+make[1]: Entering directory '/tmp'
+echo cool
+cool
+make[1]: Leaving directory '/tmp'
+~~~
+
+# substitutions
+
+~~~{.raw}
+md-files=$(wildcard *md)
+md-files=$(shell print *md(/u:$$USER:) )
+html-files=$(md-files:%.md=%.html)
+~~~
 
 # make dans vim
 
 ~~~{.viml}
-set make
+set autowrite
+set aw
+set makeprg=make
+set makeprg=python3\ %
 set makeprg=make %:r.html
+nnoremap ,x :make<cr>
 make
 ~~~
+
+aller plus loin avec quickfix.
 
 # make dans vim + tmux
 
