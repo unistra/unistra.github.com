@@ -1,13 +1,10 @@
 SHELL = /usr/bin/zsh
 
 template= template.beamer.latex
-chapters = \
-    index.md \
-    touch.md
+chapters = index.md
 components= $(chapters) $(template) prelude.latex deps.pdf deps_with_phony.pdf
-
-mk-slides = pandoc \
-    -f markdown -t beamer+escaped_line_breaks \
+pandoc-options= pipe_tables+grid_tables+multiline_tables+escaped_line_breaks
+mk-slides = pandoc -f markdown -t beamer+$(pandoc-options) \
     --template $(template)
 
 slides.pdf slides.latex: $(components)
@@ -24,5 +21,3 @@ deps.pdf: deps.dot
 
 $(template):
 	pandoc -D beamer > $@
-
-
