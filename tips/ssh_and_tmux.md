@@ -124,3 +124,24 @@ jean ne peut maintenant se connecter à votre machine (et avec votre identitée)
 
     tmux rename-session hack
 
+# daily tmux
+
+## en vrac
+
+* `%` et `"` permettent de split et vsplit la fenetre courante.
+* les fleches permettent de naviguer d'un pane a l'autre.
+* `z`: passer le pane courant en pleine fenetre.
+* `w`: selection par menu de la fenetre courante
+* `s`: selection par menu de la session courante
+
+    tmux list-keys -t table # par exemple vi-copy
+
+## déplacer des panes dans une autre session
+
+lorsque ta session deborde et que tu déplacerais bien qq fenetres dans 
+une nouvelle session (appellons-la awesome)
+
+    :new -ds awesome # pour créer une session depuis la session
+    :movew aw        # pour bouger la fenetre courante 
+                     # dans la session dont le nom commence par "aw"
+
