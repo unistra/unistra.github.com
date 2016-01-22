@@ -385,6 +385,44 @@ md-files=$(shell print *md(/u:$$USER:) )
 html-files=$(md-files:%.md=%.html)
 ~~~
 
+# astuces variables
+
+~~~{.make}
+INSTALLDIR ?= $(error INSTALLDIR doit être défini : make INSTALLDIR=/tmp)
+SRCDIR ?= src$(info utilise "src" par défaut)
+
+DOT ?= $(shell which dot)
+ifeq ($(DOT),)
+  $(error graphviz est requis : sudo apt-get install graphviz)
+endif
+
+SOURCES = $(wildcard $(SRCDIR)/*.c)
+CSSFILES = $(SOURCES:%.less=%.css)
+CSSFILES = $(patsubst %.less,%.css,$(SOURCES))
+CSSFILES = $(patsubst %.less,%.css,$(wildcard $(SRCDIR)/*.c))
+
+dipstrap-all.css: $(addsuffix .less, dip theme) bootstrap.css
+%-all.css: ; cat $(filter %.less,$^) | lessc - $@ && cat $(filter %.css,$^) >> $@
+~~~
+
+# règles :: (avancé)
+
+~~~{.make}
+lib: src1 src2 ; … > lib …
+
+clean:: ; -rm lib
+
+prog: src3 src3 ; … -o prog …
+
+clean:: ; -rm prog
+~~~
+
+utilisé par cdbs (The Common Debian Build System) :
+~~~{.make}
+include /usr/share/cdbs/1/rules/debhelper.mk
+install/monpkg:: ; install prog …/usr/bin/prog
+~~~
+
 # make dans vim
 
 ~~~{.viml}
