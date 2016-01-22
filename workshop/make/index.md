@@ -1,5 +1,8 @@
 ---
 author: Marc Chantreux
+urls:
+    - http://unistra.github.io/workshop/make/slides.pdf
+    - https://github.com/eiro/eiro.github.com/blob/master/training/unix/terminal.pdf
 title: make
 header-includes: \input{prelude.latex}
 ---
@@ -74,7 +77,7 @@ exemples d'usages connus
     * utilisé par de nombreux projets OSS
 * paquets debian:
     * archives `ar`
-    * `control` est un `Makefile`
+    * `rules` est un `Makefile`
 
 # makefile
 
@@ -137,6 +140,7 @@ targets: dependencies \
 other-dependencies
     a-very-long command with \
     a lot of arguments
+    another command
 ~~~
 
 
@@ -220,9 +224,9 @@ hello.txt hello2.txt:
 behave.js:      behave.ls       ; lsc $<
 components.js:  components.ls   ; lsc $<
 bus.js:         bus.ls          ; lsc $<
-foo.svg:        foo.dot         ; dot -Tsvg -o $< $@
-bar.svg:        bar.dot         ; dot -Tsvg -o $< $@
-bang.svg:       bang.dot        ; dot -Tsvg -o $< $@
+foo.svg:        foo.dot         ; dot -Tsvg -o $@ $<
+bar.svg:        bar.dot         ; dot -Tsvg -o $@ $<
+bang.svg:       bang.dot        ; dot -Tsvg -o $@ $<
 ~~~
 
 # pattern matching
@@ -231,9 +235,9 @@ bang.svg:       bang.dot        ; dot -Tsvg -o $< $@
 behave.js:      behave.ls       ; lsc $<
 components.js:  components.ls   ; lsc $<
 bus.js:         bus.ls          ; lsc $<
-foo.svg:        foo.dot         ; dot -Tsvg -o $< $@
-bar.svg:        bar.dot         ; dot -Tsvg -o $< $@
-bang.svg:       bang.dot        ; dot -Tsvg -o $< $@
+foo.svg:        foo.dot         ; dot -Tsvg -o $@ $<
+bar.svg:        bar.dot         ; dot -Tsvg -o $@ $<
+bang.svg:       bang.dot        ; dot -Tsvg -o $@ $<
 ~~~
 
 peut s'écrire
@@ -259,7 +263,7 @@ le [pattern match](https://www.gnu.org/software/make/manual/html_node/Pattern-Ma
 
 |target|fichier|stem|
 |:-|:-|:-|
-|id_%\_key|`id_rsa_key.pub`|rsa|
+|id_%\_key.pub|`id_rsa_key.pub`|rsa|
 |mod.%|mod.enigma|enigma|
 |%.mod|enigma.mod|enigma|
 
@@ -271,7 +275,7 @@ règle telle que
     make funk-to-funky
 
 soit une copie de `ashes-to-ashes` que vous aurez préalablement créé. au
-passage, vous affichez le stem sur sur la stdout.
+passage, vous affichez le stem sur la stdout.
 
 # variables
 
