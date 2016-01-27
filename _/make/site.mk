@@ -38,7 +38,6 @@ info:
 	@ echo options enable:
 	@ echo "    defs: $(use-defs)"
 
-
 $(pages): $(html_tmpl)
 
 ifeq ($(jade_tmpl),)
@@ -55,11 +54,8 @@ menu: menu.md.
 	@ echo update page $@
 	@ { $(pandoc_page) |$(postdef)} < $< > $@
 
-%.css: %.us
-	stylus -c $<
-
-%.js: %.ls
-	lsc -c $<
+%.css  : %.us  ; stylus -c $<
+%.js   : %.ls  ; lsc -c $<
 
 %.latex %.pdf: %.md
 	$(pandoc) -s -t beamer+$(pandoc_extensions) -o $@ $<
@@ -74,5 +70,3 @@ $(m4defs): $(site)/keywords
 m4defs  ?= $(m4site)/defs
 
 endif
-
-
