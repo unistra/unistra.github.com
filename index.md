@@ -1,4 +1,4 @@
-% Documents publics de la direction informatique de l'université de Strasbourg
+% L'Université de Strasbourg sur github
 
 # Trucs et astuces
 
