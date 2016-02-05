@@ -1,5 +1,3 @@
-% L'Université de Strasbourg sur github
-
 # Trucs et astuces
 
 * [ssh et tmux](tips/ssh_and_tmux.html)
