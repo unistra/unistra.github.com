@@ -1,10 +1,12 @@
-% Syympa TT2 guidelines
+% Sympa TT2 guidelines ?
 
 This is an exemple of template found in the current
-[sympa](http://www.sympa.org) codebase. It is very similar to the examples
-you can find in the
-[Template Toolkit documentation](https://metacpan.org/release/Template-Toolkit).
-However, i think we can write better code using some extra features.
+[sympa](http://www.sympa.org) codebase.
+
+
+It is very similar to the examples you can find in the [Template Toolkit
+documentation](https://metacpan.org/release/Template-Toolkit).  However, i
+think we can write better code using some extra features.
 
 This article is not a tutorial: it assumes you're already familiar with the TT2
 syntax.
@@ -22,9 +24,8 @@ so let's see
 [% END %] 
 ~~~
 
-* As filters can be used to anything you have to render, 
+* As filters can be used to anything you have to render,
   `[%|loc%]Create list[%END%]` may be rewritten as `[% "Create list" |loc %]`.
-
 * The `SET` instruction is optionnal and can use ternary operator. so
 
 ~~~{.tt2}
@@ -35,7 +36,7 @@ so let's see
 [% END %]
 ~~~
 
-  can be rewritten as
+can be rewritten as
 
 ~~~{.tt2}
 [% class = action == 'create_list_request'
@@ -44,8 +45,8 @@ so let's see
 %]
 ~~~
 
-* closing a template section is not needed as all the TT2 instructions
-  can be separated with `;`. so 
+closing a template section is not needed as all the TT2 instructions
+can be separated with `;`. so 
 
 ~~~{.tt2}
 [% IF may_create_list %]
@@ -66,20 +67,52 @@ so let's see
 END %]
 ~~~
 
+Another thing to realize is that void context strings wherever you
+are in template instructions and can be interpolated so this
+
+~~~{.tt2}
+   %]<li><a class="[% class %]" href="[% path_cgi %]/create_list_request">[%
+   "Create list" | loc;
+   %]</a></li>[%
+~~~
+
+can be written as
+
+~~~{.tt2}
+   "<li><a class="$class" href="$class/create_list_request">[%
+        "Create list" | loc
+    %]</a></li>";
+~~~
+
+or even
+
+~~~{.tt2}
+   "<li><a class="$class" href="$class/create_list_request">";
+   "Create list" | loc;
+   "</a></li>";
+~~~
+
 Put it all together and the final block is
 
 ~~~{.tt2}
 [% IF may_create_list;
+
     class = action == 'create_list_request'
 	? 'MainMenuLinksCurrentPage'
 	: 'MainMenuLinks';
-   %]<li><a class="[% class %]"[% 
-   %] href="[% path_cgi %]/create_list_request">[%
+
+   "<li><a class="$class" href="$class/create_list_request">";
    "Create list" | loc;
-   %]</a></li>[%
+   "</a></li>";
+
 END %]
 ~~~
 
 more examples to come
+
+* more about block, include, filters and local variables
+  to create more reusable business objects into sympa.
+* about vmethods to be faster and less memory consumming
+* ... (just ask ...)
 
 
