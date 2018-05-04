@@ -2,9 +2,7 @@
 
 * [ssh et tmux](tips/ssh_and_tmux.html)
 * [vim](tips/vim.html)
-* [zsh](tips/zsh.html)
 * [git](tips/git.html)
-* [vt](tips/vt.html)
 * [réaliser un screencast sous windows](tips/screencasting.html)
 * [Perl pitfalls](dev/perl/pitfalls.html) document écrit pour remplacer la section actuelle de la doc de sympa
 * [Perl TT2](dev/perl/tt2.html) TT2 coding style pour sympa
